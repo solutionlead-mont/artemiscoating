@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-10T14:35:41.002Z",
+  "basePricing": {
+    "epoxy": {
+      "entry": [
+        4,
+        8
+      ],
+      "mid": [
+        5,
+        9
+      ],
+      "premium": [
+        8,
+        15
+      ]
+    }
+  },
+  "surcharges": {
+    "commercial": {
+      "label": "Commercial installation",
+      "min": 2,
+      "max": 4
+    },
+    "industrial": {
+      "label": "Industrial installation",
+      "min": 3,
+      "max": 6
+    },
+    "outdoor_nonepoxy": {
+      "label": "Outdoor installation",
+      "min": 3,
+      "max": 6
+    },
+    "outdoor_epoxy_uv": {
+      "label": "Outdoor UV coating",
+      "min": 1.5,
+      "max": 3
+    },
+    "concrete_minor": {
+      "label": "Concrete — minor cracks",
+      "min": 1,
+      "max": 2.5
+    },
+    "concrete_major": {
+      "label": "Concrete — major repair",
+      "min": 3,
+      "max": 6
+    }
+  }
+}

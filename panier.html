@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panier — Artemis Coating</title>
+<meta name="description" content="Votre panier Artemis Coating : vérifiez vos produits, ajustez les quantités et demandez une soumission.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+
+<a href="#contenu" class="sr-only">Aller au contenu</a>
+
+<!-- Menu partagé -->
+<div data-include="partials/header.html"></div>
+
+<main id="contenu" class="cart-main" data-cart-page>
+  <div class="cart-wrap">
+    <nav class="cart-breadcrumb" aria-label="Fil d'Ariane">
+      <a href="index.html">ACCUEIL</a>
+      <span aria-hidden="true">/</span>
+      <span class="gold">PANIER</span>
+    </nav>
+
+    <header class="cart-head">
+      <span class="eyebrow">Boutique</span>
+      <h1>Votre panier</h1>
+      <p>Vérifiez vos produits, ajustez les quantités, puis demandez une soumission.</p>
+    </header>
+
+    <div class="cart-layout" data-cart-content>
+      <section class="cart-items" aria-label="Produits dans le panier">
+        <div data-cart-items></div>
+
+        <div class="cart-items-foot">
+          <a class="cart-continue" href="produits.html">← Continuer mes achats</a>
+          <button class="cart-clear" type="button" data-cart-action="clear">Vider le panier</button>
+        </div>
+      </section>
+
+      <aside class="cart-summary" aria-label="Résumé du panier">
+        <h2>Résumé</h2>
+        <dl>
+          <div><dt>Articles</dt><dd><span data-cart-count-label>0</span></dd></div>
+          <div><dt>Sous-total</dt><dd data-cart-subtotal>Sur demande</dd></div>
+          <div><dt>Livraison</dt><dd>À confirmer</dd></div>
+          <div class="cart-total"><dt>Total</dt><dd data-cart-total>Sur demande</dd></div>
+        </dl>
+        <p class="cart-note" data-cart-note>Certains prix sont à confirmer : nous vous enverrons une soumission détaillée.</p>
+        <a class="btn btn--gold cart-checkout" href="contact.html">Demander une soumission →</a>
+      </aside>
+    </div>
+
+    <div class="cart-empty" data-cart-empty hidden>
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 20 H54 L50 58 H14 Z"/><path d="M22 20 V14 A10 10 0 0 1 42 14 V20"/></svg>
+      <h2>Votre panier est vide</h2>
+      <p>Ajoutez des produits depuis la boutique pour préparer votre demande.</p>
+      <a class="btn btn--gold" href="produits.html">Voir les produits →</a>
+    </div>
+  </div>
+</main>
+
+<div data-include="partials/footer.html"></div>
+
+<script src="js/include.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

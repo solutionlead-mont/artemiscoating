@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Gestion des tarifs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+body{background:#f8f7f5;color:#1a1a1a;font-family:'Inter',-apple-system,sans-serif;min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font-family:inherit}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid #e8e5e0}
+.topbar-inner{max-width:1120px;margin:0 auto;padding:.85rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-logo{width:36px;height:31px;flex:0 0 auto;display:block}
+.brand-name{font-size:14px;font-weight:900;line-height:1.15;letter-spacing:.06em}
+.brand-name .brand-gold{color:#8A6A3B;font-weight:700;letter-spacing:.14em}
+.brand-sub{font-size:11px;color:#999;line-height:1.3;letter-spacing:.04em;text-transform:uppercase}
+.top-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.top-link{font-size:13px;font-weight:600;color:#666;text-decoration:none;padding:8px 10px;border-radius:8px;transition:background .15s,color .15s;background:transparent;border:none;cursor:pointer}
+.top-link:hover{background:#f5f2ec;color:#1a1a1a}
+.top-link.danger:hover{background:#fef2f2;color:#dc2626}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1120px;margin:0 auto;padding:2rem 1.25rem 7rem}
+.card{background:#fff;border:1px solid #eeebe6;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:1.5rem;margin-bottom:1.25rem}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#C9922A;margin-bottom:.6rem}
+h1{font-size:24px;font-weight:800;line-height:1.25;letter-spacing:-.01em}
+h2{font-size:16px;font-weight:700;line-height:1.3}
+.sub{font-size:13px;color:#777;line-height:1.6;margin-top:.35rem}
+
+/* ---------- Login ---------- */
+.login-wrap{display:flex;justify-content:center;padding-top:3rem}
+.login-card{width:100%;max-width:400px;padding:2rem 1.75rem;text-align:center}
+.login-icon{width:52px;height:52px;border-radius:14px;background:#1a1a1a;color:#C9922A;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 1rem}
+.login-card h1{font-size:21px}
+.login-card .sub{margin-bottom:1.5rem}
+.field{text-align:left;margin-bottom:1rem}
+.field label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;letter-spacing:.02em}
+.field input{width:100%;background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px 13px;color:#1a1a1a;font-size:15px;font-family:inherit;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none}
+.field input:focus{border-color:#C9922A;box-shadow:0 0 0 3px rgba(201,146,42,.12)}
+.field input.invalid{border-color:#dc2626}
+.login-note{font-size:11px;color:#aaa;line-height:1.5;margin-top:1rem}
+.login-error{display:none;font-size:12px;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:9px 12px;margin-bottom:1rem;text-align:left;line-height:1.5}
+.login-error.show{display:block}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 18px;background:#1a1a1a;color:#fff;border:1px solid #1a1a1a;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:transform .15s,opacity .15s,background .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px);opacity:.92}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-block{width:100%}
+.btn-ghost{background:#fff;color:#555;border:1px solid #ddd}
+.btn-ghost:hover{background:#faf9f7;color:#1a1a1a}
+.btn-danger{color:#dc2626;border-color:#f3d4d4}
+.btn-danger:hover{background:#fef2f2;color:#b91c1c}
+.btn .spinner-mini{width:14px;height:14px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Page head ---------- */
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#777;background:#fff;border:1px solid #e8e5e0;border-radius:999px;padding:6px 11px;white-space:nowrap}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:#C9922A}
+.pill.dirty{color:#a16207;border-color:#fde68a;background:#fffbeb}
+.pill.dirty .dot{background:#eab308}
+
+/* ---------- Alerts ---------- */
+.alert{display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:1rem 1.1rem;margin-bottom:1.25rem;font-size:13px;color:#991b1b;line-height:1.6}
+.alert.show{display:block}
+.alert strong{display:block;margin-bottom:4px}
+.alert ul{margin:6px 0 0 18px}
+.alert li{margin-bottom:2px}
+
+/* ---------- Card head ---------- */
+.card-head{margin-bottom:1.1rem}
+.card-head p{font-size:12px;color:#999;line-height:1.5;margin-top:3px}
+
+/* ---------- Type grid ---------- */
+.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.type-card{border:1px solid #eeebe6;border-radius:10px;padding:.9rem .95rem;background:#fff}
+.type-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:.5rem}
+.type-name{font-size:13px;font-weight:700;line-height:1.25}
+.type-key{font-size:9px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#bbb;background:#f7f5f2;border-radius:4px;padding:2px 5px;white-space:nowrap}
+.rate-row{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:center;padding:7px 0;border-top:1px solid #f4f1ec}
+.rate-row:first-of-type{border-top:none;padding-top:2px}
+.tier-name{font-size:11px;font-weight:600;color:#888}
+.rate-inputs{display:grid;grid-template-columns:1fr auto 1fr;gap:5px;align-items:end}
+.num{display:block;min-width:0}
+.num span{display:block;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.num input{width:100%;min-width:0;background:#fff;border:1px solid #e3dfd9;border-radius:6px;padding:6px 7px;font-size:13px;font-weight:600;font-family:inherit;color:#1a1a1a;outline:none;transition:border-color .15s,box-shadow .15s;-moz-appearance:textfield}
+.num input::-webkit-outer-spin-button,.num input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.num input:focus{border-color:#C9922A;box-shadow:0 0 0 2px rgba(201,146,42,.12)}
+.num input.bad{border-color:#dc2626;background:#fff7f7}
+.dash{color:#ccc;font-size:11px;padding-bottom:8px;text-align:center}
+
+/* ---------- Surcharges ---------- */
+.sur-grid{display:flex;flex-direction:column;gap:10px}
+.sur-row{display:grid;grid-template-columns:minmax(0,1fr) 96px auto 96px;gap:10px;align-items:end;padding:.7rem .85rem;border:1px solid #eeebe6;border-radius:10px;background:#fff}
+.sur-row .num span{font-size:8px}
+.sur-label{display:block;min-width:0}
+.sur-label span{display:block;font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#bbb;margin-bottom:2px}
+.sur-label input{width:100%;background:#fff;border:1px solid #e3dfd9;border-radius:6px;padding:7px 9px;font-size:13px;font-weight:500;font-family:inherit;color:#1a1a1a;outline:none;transition:border-color .15s,box-shadow .15s}
+.sur-label input:focus{border-color:#C9922A;box-shadow:0 0 0 2px rgba(201,146,42,.12)}
+.unit{font-size:10px;color:#bbb;font-weight:600;padding-bottom:9px;white-space:nowrap}
+
+/* ---------- Sticky actions ---------- */
+.sticky-actions{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-top:1px solid #e8e5e0;padding:.8rem 1.25rem;box-shadow:0 -6px 24px rgba(0,0,0,.04)}
+.sticky-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;gap:8px;justify-content:flex-end}
+.sticky-inner .spacer{flex:1}
+.sticky-note{font-size:11px;color:#aaa;line-height:1.4;text-align:left}
+
+/* ---------- Static workflow notice ---------- */
+.notice-static{background:#fffbf5;border:1px solid #e8d9bd;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem;font-size:13px;color:#5c4a25;line-height:1.6}
+.notice-static strong{color:#1a1a1a;font-weight:700}
+.notice-static ol{margin:.5rem 0 0;padding-left:1.25rem}
+.notice-static li{margin-bottom:2px}
+.notice-static code{background:#f2ece1;border-radius:4px;padding:1px 5px;font-size:12px}
+.server-status{margin-top:.55rem;font-size:12px;font-weight:600;line-height:1.5;color:#8a7450}
+.server-status.ok{color:#15803d}
+.server-status.warn{color:#a16207}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;left:50%;bottom:86px;transform:translate(-50%,12px);z-index:80;background:#1a1a1a;color:#fff;font-size:13px;font-weight:600;padding:11px 18px;border-radius:9px;box-shadow:0 8px 30px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:calc(100vw - 2rem);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.error{background:#b91c1c}
+
+/* ---------- Loading ---------- */
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:2.5rem 0;color:#888;font-size:13px}
+.loading .spinner-mini{width:16px;height:16px;border:2px solid #e8e5e0;border-top-color:#C9922A;border-radius:50%;animation:spin .7s linear infinite}
+
+@media(max-width:900px){.type-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){
+  .wrap{padding:1.25rem 1rem 8rem}
+  .type-grid{grid-template-columns:1fr}
+  .sur-row{grid-template-columns:1fr 1fr;gap:8px}
+  .sur-row .sur-label{grid-column:1 / -1}
+  .sur-row .unit{display:none}
+  .page-head{align-items:flex-start}
+  .sticky-note{display:none}
+  .sticky-inner{justify-content:stretch;flex-wrap:wrap}
+  .sticky-inner .btn{flex:1 1 auto}
+  .brand-sub{display:none}
+  .topbar-inner{flex-wrap:wrap;row-gap:.4rem}
+  .top-actions{width:100%;justify-content:flex-start;flex-wrap:wrap;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <svg class="brand-logo" viewBox="0 0 40 34" aria-hidden="true"><path d="M20 1 L39 33 H1 Z" fill="#C9A46A"/><path d="M20 1 L20 13 L10 29 H1 Z" fill="#8A6A3B"/><path d="M20 13 L30 29 H10 Z" fill="#111110"/></svg>
+      <div>
+        <div class="brand-name">ARTEMIS <span class="brand-gold">COATING</span></div>
+        <div class="brand-sub">Gestion des tarifs</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <a class="top-link" href="../estimateur.html" target="_blank" rel="noopener">Voir l'estimateur ↗</a>
+      <button class="top-link" id="importBtn" type="button">Importer un JSON</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+      <button class="top-link danger" id="downloadTopBtn" type="button">Télécharger une copie</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- Éditeur -->
+  <div id="editorView">
+    <div class="page-head">
+      <div>
+  
+      <span class="pill" id="saveState"><span class="dot"></span><span id="saveStateText">Chargement…</span></span>
+    </div>
+
+    <div class="alert" id="alertBox"></div>
+
+
+    <div id="loadingView" class="loading"><span class="spinner-mini"></span>Chargement des tarifs…</div>
+
+    <div id="editorContent" hidden>
+      <section class="card">
+        <div class="card-head">
+          <h2>Tarifs de base</h2>
+          <p>Prix par pied carré ($/sqft), fourchette min – max. Ces tarifs incluent déjà le facteur de perte matière (~10 %).</p>
+        </div>
+        <div class="type-grid" id="baseGrid"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Suppléments</h2>
+          <p>Montants ajoutés au tarif de base, en $/sqft. Le libellé apparaît dans le détail de l'estimation.</p>
+        </div>
+        <div class="sur-grid" id="surGrid"></div>
+      </section>
+    </div>
+  </div>
+
+</main>
+
+<div class="sticky-actions" id="stickyBar">
+  <div class="sticky-inner">
+    <p class="sticky-note" id="stickyNote">Enregistrez directement dans estimateur/prices.json.</p>
+    <span class="spacer"></span>
+    <button class="btn btn-ghost btn-danger" id="resetBtn" type="button">Réinitialiser</button>
+    <button class="btn" id="saveBtn" type="button">Enregistrer dans prices.json</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  var TYPES = ['epoxy'];
+  var TIERS = ['entry','mid','premium'];
+  var SURCHARGE_KEYS = ['commercial','industrial','outdoor_nonepoxy','outdoor_epoxy_uv','concrete_minor','concrete_major'];
+  var TYPE_NAMES = {
+    hardwood:'Hardwood', engineered:'Engineered Wood', lvp:'LVP / SPC', laminate:'Laminate',
+    ceramic:'Ceramic / Porcelain', stone:'Natural Stone', carpet:'Carpet',
+    epoxy:'Concrete & Epoxy', polished:'Polished Concrete'
+  };
+  var TIER_NAMES = { entry:'Entry', mid:'Mid', premium:'Premium' };
+
+  // Valeurs d'origine — identiques aux tarifs par défaut de estimateur.html
+  var DEFAULT_PRICING = {
+    version: 1,
+    basePricing: {
+      hardwood:  {entry:[6,10],  mid:[10,16], premium:[16,25]},
+      engineered:{entry:[5,9],   mid:[9,14],  premium:[14,22]},
+      lvp:       {entry:[4,6],   mid:[6,9],   premium:[9,13]},
+      laminate:  {entry:[3,6],   mid:[5,8],   premium:[8,11]},
+      ceramic:   {entry:[7,11],  mid:[11,18], premium:[18,35]},
+      stone:     {entry:[14,20], mid:[20,32], premium:[32,60]},
+      carpet:    {entry:[2,4],   mid:[4,6],   premium:[6,10]},
+      epoxy:     {entry:[4,7],   mid:[5,9],   premium:[8,15]},
+      polished:  {entry:[3,5],   mid:[5,8],   premium:[8,12]}
+    },
+    surcharges: {
+      commercial:       {label:'Commercial installation', min:2,   max:4},
+      industrial:       {label:'Industrial installation', min:3,   max:6},
+      outdoor_nonepoxy: {label:'Outdoor installation',    min:3,   max:6},
+      outdoor_epoxy_uv: {label:'Outdoor UV coating',      min:1.5, max:3},
+      concrete_minor:   {label:'Concrete — minor cracks', min:1,   max:2.5},
+      concrete_major:   {label:'Concrete — major repair', min:3,   max:6}
+    }
+  };
+
+  var dirty = false;
+  var busy = false;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var editorView = $('editorView');
+  var baseGrid = $('baseGrid'), surGrid = $('surGrid'), loadingView = $('loadingView');
+  var editorContent = $('editorContent'), alertBox = $('alertBox'), saveState = $('saveState');
+  var saveStateText = $('saveStateText'), toastEl = $('toast');
+  var importFile = $('importFile');
+
+  function esc(v){
+    return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+
+  /* ------------------------------ Toast / alert ------------------------------ */
+
+  var toastTimer = null;
+  function toast(message, isError){
+    toastEl.textContent = message;
+    toastEl.className = 'toast show' + (isError ? ' error' : '');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toastEl.className = 'toast'; }, 3200);
+  }
+
+  function hideAlert(){
+    alertBox.className = 'alert';
+    alertBox.innerHTML = '';
+  }
+
+  function showAlert(message, details){
+    var html = '<strong>' + esc(message) + '</strong>';
+    if (details && details.length) {
+      html += '<ul>' + details.map(function(d){ return '<li>' + esc(d) + '</li>'; }).join('') + '</ul>';
+    }
+    alertBox.innerHTML = html;
+    alertBox.className = 'alert show';
+    alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  /* --------------------------------- State ---------------------------------- */
+
+  function setDirty(value){
+    dirty = !!value;
+    saveState.className = 'pill' + (dirty ? ' dirty' : '');
+    saveStateText.textContent = dirty ? 'Modifications non exportées' : 'À jour';
+  }
+
+  function setExported(){
+    dirty = false;
+    saveState.className = 'pill';
+    saveStateText.textContent = 'Copie téléchargée — remplacez prices.json';
+  }
+
+  function setSaved(name){
+    dirty = false;
+    saveState.className = 'pill';
+    saveStateText.textContent = 'Enregistré dans ' + (name || 'prices.json');
+  }
+
+  function setUpdated(iso){
+    if (!iso) {
+      saveState.className = 'pill';
+      saveStateText.textContent = 'Valeurs par défaut';
+      return;
+    }
+    var date = new Date(iso);
+    if (isNaN(date.getTime())) {
+      saveStateText.textContent = 'À jour';
+      return;
+    }
+    saveState.className = 'pill';
+    saveStateText.textContent = 'Mis à jour le ' + date.toLocaleString('fr-FR', {
+      day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  /* -------------------------------- Rendering ------------------------------- */
+
+  function baseCard(type){
+    var rows = TIERS.map(function(tier){
+      return '<div class="rate-row">'
+        + '<span class="tier-name">' + TIER_NAMES[tier] + '</span>'
+        + '<div class="rate-inputs">'
+          + '<label class="num"><span>Min</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
+            + ' data-kind="base" data-type="' + type + '" data-tier="' + tier + '" data-bound="min"'
+            + ' aria-label="' + esc(TYPE_NAMES[type]) + ' ' + TIER_NAMES[tier] + ' minimum"></label>'
+          + '<span class="dash">–</span>'
+          + '<label class="num"><span>Max</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
+            + ' data-kind="base" data-type="' + type + '" data-tier="' + tier + '" data-bound="max"'
+            + ' aria-label="' + esc(TYPE_NAMES[type]) + ' ' + TIER_NAMES[tier] + ' maximum"></label>'
+        + '</div>'
+      + '</div>';
+    }).join('');
+
+    return '<div class="type-card">'
+      + '<div class="type-head"><span class="type-name">' + esc(TYPE_NAMES[type] || type) + '</span>'
+      + '<span class="type-key">' + esc(type) + '</span></div>'
+      + rows
+    + '</div>';
+  }
+
+  function surchargeRow(key){
+    return '<div class="sur-row">'
+      + '<label class="sur-label"><span>Libellé</span><input type="text" maxlength="80"'
+        + ' data-kind="sur-label" data-key="' + key + '" aria-label="Libellé du supplément ' + esc(key) + '"></label>'
+      + '<label class="num"><span>Min $/sqft</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
+        + ' data-kind="sur" data-key="' + key + '" data-bound="min" aria-label="Supplément ' + esc(key) + ' minimum"></label>'
+      + '<span class="unit">–</span>'
+      + '<label class="num"><span>Max $/sqft</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
+        + ' data-kind="sur" data-key="' + key + '" data-bound="max" aria-label="Supplément ' + esc(key) + ' maximum"></label>'
+    + '</div>';
+  }
+
+  function render(data){
+    baseGrid.innerHTML = TYPES.map(baseCard).join('');
+    surGrid.innerHTML = SURCHARGE_KEYS.map(surchargeRow).join('');
+
+    var bp = data && data.basePricing ? data.basePricing : {};
+    var surs = data && data.surcharges ? data.surcharges : {};
+
+    TYPES.forEach(function(type){
+      TIERS.forEach(function(tier){
+        var rate = bp[type] && bp[type][tier];
+        var min = Array.isArray(rate) ? rate[0] : (rate && rate.min);
+        var max = Array.isArray(rate) ? rate[1] : (rate && rate.max);
+        setInput('base', type, tier, 'min', min);
+        setInput('base', type, tier, 'max', max);
+      });
+    });
+
+    SURCHARGE_KEYS.forEach(function(key){
+      var s = surs[key] || {};
+      var labelInput = surGrid.querySelector('input[data-kind="sur-label"][data-key="' + key + '"]');
+      if (labelInput) labelInput.value = s.label || '';
+      setInput('sur', key, null, 'min', s.min);
+      setInput('sur', key, null, 'max', s.max);
+    });
+
+    setUpdated(data && data.updatedAt);
+    setDirty(false);
+    hideAlert();
+  }
+
+  function setInput(kind, a, b, bound, value){
+    var selector = kind === 'base'
+      ? 'input[data-kind="base"][data-type="' + a + '"][data-tier="' + b + '"][data-bound="' + bound + '"]'
+      : 'input[data-kind="sur"][data-key="' + a + '"][data-bound="' + bound + '"]';
+    var input = document.querySelector(selector);
+    if (!input) return;
+    input.value = (value === null || value === undefined || value === '') ? '' : value;
+    input.classList.remove('bad');
+  }
+
+  /* ---------------------------------- Read ---------------------------------- */
+
+  function parseNum(value){
+    var v = String(value == null ? '' : value).trim().replace(',', '.');
+    if (v === '') return null;
+    var n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function collect(){
+    var basePricing = {};
+    TYPES.forEach(function(type){
+      basePricing[type] = {};
+      TIERS.forEach(function(tier){
+        var minInput = document.querySelector('input[data-kind="base"][data-type="' + type + '"][data-tier="' + tier + '"][data-bound="min"]');
+        var maxInput = document.querySelector('input[data-kind="base"][data-type="' + type + '"][data-tier="' + tier + '"][data-bound="max"]');
+        basePricing[type][tier] = [parseNum(minInput.value), parseNum(maxInput.value)];
+      });
+    });
+
+    var surcharges = {};
+    SURCHARGE_KEYS.forEach(function(key){
+      var labelInput = surGrid.querySelector('input[data-kind="sur-label"][data-key="' + key + '"]');
+      var minInput = surGrid.querySelector('input[data-kind="sur"][data-key="' + key + '"][data-bound="min"]');
+      var maxInput = surGrid.querySelector('input[data-kind="sur"][data-key="' + key + '"][data-bound="max"]');
+      surcharges[key] = {
+        label: labelInput ? labelInput.value.trim() : '',
+        min: parseNum(minInput.value),
+        max: parseNum(maxInput.value)
+      };
+    });
+
+    return { basePricing: basePricing, surcharges: surcharges };
+  }
+
+  function checkPair(minInput, maxInput){
+    if (!minInput || !maxInput) return false;
+    var min = parseNum(minInput.value);
+    var max = parseNum(maxInput.value);
+    if (min !== null && max !== null && min > max) {
+      minInput.classList.add('bad');
+      maxInput.classList.add('bad');
+      return true;
+    }
+    return false;
+  }
+
+  function markInvalidInputs(){
+    var invalid = false;
+    var inputs = document.querySelectorAll('#baseGrid input[data-bound], #surGrid input[data-bound]');
+    inputs.forEach(function(input){
+      var value = parseNum(input.value);
+      var bad = value === null || value < 0 || value > 10000;
+      input.classList.toggle('bad', bad);
+      if (bad) invalid = true;
+    });
+
+    TYPES.forEach(function(type){
+      TIERS.forEach(function(tier){
+        var sel = 'input[data-kind="base"][data-type="' + type + '"][data-tier="' + tier + '"][data-bound="';
+        if (checkPair(document.querySelector(sel + 'min"]'), document.querySelector(sel + 'max"]'))) invalid = true;
+      });
+    });
+
+    SURCHARGE_KEYS.forEach(function(key){
+      var sel = '#surGrid input[data-kind="sur"][data-key="' + key + '"][data-bound="';
+      if (checkPair(document.querySelector(sel + 'min"]'), document.querySelector(sel + 'max"]'))) invalid = true;
+    });
+
+    return invalid;
+  }
+
+  /* ------------------------------- Data flows -------------------------------- */
+
+  function buildPayload(){
+    var data = collect();
+    return {
+      version: 1,
+      updatedAt: new Date().toISOString(),
+      basePricing: data.basePricing,
+      surcharges: data.surcharges
+    };
+  }
+
+  function downloadJSON(){
+    var payload = buildPayload();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'prices.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    setExported();
+    toast('Copie de prices.json téléchargée ✓');
+  }
+
+  /* ---------------------- Enregistrement direct du fichier ------------------- */
+
+  /* Serveur local facultatif : écrit prices.json sans fenêtre.
+     Lancez Demarrer-le-site.bat, puis ouvrez http://127.0.0.1:8090/... */
+  var SAVE_SERVER = (function(){
+    try {
+      var custom = new URLSearchParams(location.search).get('saveServer');
+      if (custom) return custom;
+    } catch (e) {}
+    return 'http://127.0.0.1:8090/api/prices';
+  })();
+  var SAVE_SERVER_STATUS = SAVE_SERVER.replace(/\/api\/prices\/?$/, '/api/prices/status');
+
+  /* Enregistrement direct via WAMP/PHP : même dossier que cette page. */
+  var PHP_SAVE = 'save-prices.php';
+
+  var saveServerReady = false;
+  var phpSaveReady = false;
+  var activeHandle = null;
+  var serverStatusEl = $('serverStatus');
+
+  function setServerStatus(kind, message){
+    if (!serverStatusEl) return;
+    serverStatusEl.className = 'server-status' + (kind ? ' ' + kind : '');
+    serverStatusEl.textContent = message;
+  }
+
+  function fetchWithTimeout(url, options, ms){
+    return new Promise(function(resolve, reject){
+      var controller = ('AbortController' in window) ? new AbortController() : null;
+      var timer = setTimeout(function(){
+        if (controller) controller.abort();
+        reject(new Error('Délai dépassé'));
+      }, ms || 1800);
+      fetch(url, Object.assign({}, options, { signal: controller ? controller.signal : undefined }))
+        .then(function(res){ clearTimeout(timer); resolve(res); }, function(err){ clearTimeout(timer); reject(err); });
+    });
+  }
+
+  function probeSaveServer(){
+    var host = location.hostname;
+    var isLocal = host === '127.0.0.1' || host === 'localhost' || host === '[::1]' || host === '::1';
+    if (!isLocal) {
+      setServerStatus('warn', 'Site en ligne : l\'admin ne peut pas écrire sur le serveur. Utilisez « Télécharger une copie », puis téléversez estimateur/prices.json.');
+      return;
+    }
+    if (location.port === '8090') {
+      saveServerReady = true;
+      setServerStatus('ok', '✓ Enregistrement direct actif — « Enregistrer » écrit dans estimateur/prices.json, sans fenêtre.');
+      return;
+    }
+
+    setServerStatus('', 'Recherche du moyen d\'enregistrement…');
+
+    /* 1) WAMP/PHP : même origine, même dossier que l'admin. */
+    fetchWithTimeout(PHP_SAVE + '?status=1', { cache: 'no-store' }, 1800)
+      .then(function(res){
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(data){
+        if (!data || data.ok !== true) throw new Error('Réponse invalide');
+        phpSaveReady = true;
+        setServerStatus('ok', '✓ Enregistrement direct actif (WAMP/PHP) — « Enregistrer » écrit dans estimateur/prices.json, sans fenêtre.');
+      })
+      .catch(function(){
+        /* 2) Serveur Node local sur 8090. */
+        fetchWithTimeout(SAVE_SERVER_STATUS, { cache: 'no-store' }, 1800)
+          .then(function(res){
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.json();
+          })
+          .then(function(data){
+            saveServerReady = !!(data && data.ok);
+            if (saveServerReady) {
+              setServerStatus('ok', '✓ Enregistrement direct actif — « Enregistrer » écrit dans estimateur/prices.json, sans fenêtre.');
+            } else {
+              setServerStatus('warn', 'Enregistrement direct non détecté. Ouvrez l\'admin via WAMP (http://localhost/artemis-site/estimateur/admin.html) ou lancez Demarrer-le-site.bat. Sinon, utilisez « Télécharger une copie ».');
+            }
+          })
+          .catch(function(){
+            saveServerReady = false;
+            setServerStatus('warn', 'Enregistrement direct non détecté. Ouvrez l\'admin via WAMP (http://localhost/artemis-site/estimateur/admin.html) ou lancez Demarrer-le-site.bat. Sinon, utilisez « Télécharger une copie ».');
+          });
+      });
+  }
+
+  function postJSON(url, json, timeoutMs){
+    return new Promise(function(resolve, reject){
+      var controller = ('AbortController' in window) ? new AbortController() : null;
+      var timer = setTimeout(function(){
+        if (controller) controller.abort();
+        reject(new Error('Délai dépassé'));
+      }, timeoutMs || 5000);
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: json,
+        signal: controller ? controller.signal : undefined
+      }).then(function(res){
+        return res.json().catch(function(){ return {}; }).then(function(data){
+          if (!res.ok || !data || data.ok !== true) {
+            throw new Error(data && data.error ? data.error : ('HTTP ' + res.status));
+          }
+          return data;
+        });
+      }).then(function(data){
+        clearTimeout(timer);
+        resolve(data);
+      }, function(err){
+        clearTimeout(timer);
+        reject(err);
+      });
+    });
+  }
+
+  function writeToHandle(handle, json){
+    return handle.createWritable().then(function(writable){
+      return writable.write(json).then(function(){
+        return writable.close();
+      });
+    });
+  }
+
+  function setBusy(label){
+    busy = true;
+    var btn = $('saveBtn');
+    btn.disabled = true;
+    btn.textContent = label || 'Enregistrement…';
+  }
+
+  function clearBusy(){
+    busy = false;
+    var btn = $('saveBtn');
+    btn.disabled = false;
+    btn.textContent = 'Enregistrer dans prices.json';
+  }
+
+  function loadPrices(){
+    loadingView.hidden = false;
+    editorContent.hidden = true;
+    hideAlert();
+    return fetch('prices.json', { cache: 'no-store' })
+      .then(function(res){
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function(data){
+        render(data);
+      })
+      .catch(function(err){
+        render(DEFAULT_PRICING);
+        showAlert('Impossible de charger prices.json — valeurs par défaut affichées.', [
+          err.message,
+          'La page doit être ouverte via un serveur (http://), pas en double-cliquant le fichier (file://).'
+        ]);
+      })
+      .finally(function(){
+        loadingView.hidden = true;
+        editorContent.hidden = false;
+      });
+  }
+
+  function importJSON(file){
+    var reader = new FileReader();
+    reader.onload = function(){
+      try {
+        var data = JSON.parse(String(reader.result));
+        if (!data || typeof data !== 'object' || (!data.basePricing && !data.surcharges)) {
+          throw new Error('Le fichier ne contient pas basePricing / surcharges.');
+        }
+        render(data);
+        setDirty(true);
+        toast('Fichier importé — vérifiez puis téléchargez');
+      } catch (err) {
+        showAlert('Import impossible.', [err.message]);
+      }
+    };
+    reader.onerror = function(){ showAlert('Import impossible.', ['Lecture du fichier échouée.']); };
+    reader.readAsText(file);
+  }
+
+  /* --------------------------------- Events --------------------------------- */
+
+  editorView.addEventListener('input', function(e){
+    if (e.target.matches('input')) {
+      e.target.classList.remove('bad');
+      if (!dirty) setDirty(true);
+    }
+  });
+
+  function validateOrWarn(){
+    if (markInvalidInputs()) {
+      showAlert('Vérifiez les champs en rouge.', [
+        'Chaque prix doit être un nombre positif, et le minimum doit être inférieur ou égal au maximum.'
+      ]);
+      return false;
+    }
+    hideAlert();
+    return true;
+  }
+
+  function handleDownload(){
+    if (busy) return;
+    if (!validateOrWarn()) return;
+    downloadJSON();
+  }
+
+  function handleSaveFile(){
+    if (busy) return;
+    if (!validateOrWarn()) return;
+
+    var json = JSON.stringify(buildPayload(), null, 2);
+
+    // 1) WAMP/PHP détecté : écriture directe, sans fenêtre.
+    if (phpSaveReady) {
+      setBusy('Enregistrement…');
+      postJSON(PHP_SAVE, json, 8000).then(function(){
+        setSaved('prices.json');
+        toast('Enregistré directement dans estimateur/prices.json ✓');
+      }).catch(function(err){
+        phpSaveReady = false;
+        setServerStatus('warn', 'Enregistrement PHP injoignable. Vérifiez que WAMP est démarré et que save-prices.php est présent dans estimateur/.');
+        showAlert('L\'enregistrement via WAMP/PHP a échoué.', [
+          err && err.message ? err.message : String(err),
+          'Vérifiez que WAMP (Apache) est démarré, puis rechargez cette page. Vous pouvez aussi utiliser « Télécharger une copie ».'
+        ]);
+      }).finally(clearBusy);
+      return;
+    }
+
+    // 2) Serveur Node local détecté : écriture directe, sans fenêtre.
+    if (saveServerReady) {
+      setBusy('Enregistrement…');
+      postJSON(SAVE_SERVER, json, 5000).then(function(){
+        setSaved('prices.json');
+        toast('Enregistré directement dans estimateur/prices.json ✓');
+      }).catch(function(err){
+        saveServerReady = false;
+        setServerStatus('warn', 'Serveur d\'enregistrement injoignable. Relancez Demarrer-le-site.bat, puis rechargez cette page.');
+        showAlert('Le serveur d\'enregistrement ne répond pas.', [
+          err && err.message ? err.message : String(err),
+          'Lancez Demarrer-le-site.bat, puis ouvrez http://127.0.0.1:8090/estimateur/admin.html. Vous pouvez aussi utiliser « Télécharger une copie ».'
+        ]);
+      }).finally(clearBusy);
+      return;
+    }
+
+    // 3) Fichier déjà choisi pendant cette visite : écriture directe.
+    if (activeHandle) {
+      setBusy('Enregistrement…');
+      writeToHandle(activeHandle, json).then(function(){
+        setSaved(activeHandle.name);
+        toast('Enregistré dans ' + activeHandle.name + ' ✓');
+      }).catch(function(err){
+        activeHandle = null;
+        showAlert('Enregistrement impossible.', [
+          err && err.message ? err.message : String(err),
+          'Utilisez « Télécharger une copie ».'
+        ]);
+      }).finally(clearBusy);
+      return;
+    }
+
+    // 3) Sinon, ouvrir le sélecteur TOUT DE SUITE : le navigateur exige un clic direct.
+    if (!window.showSaveFilePicker) {
+      toast('Enregistrement direct indisponible — copie téléchargée', true);
+      downloadJSON();
+      return;
+    }
+
+    var picker;
+    try {
+      picker = window.showSaveFilePicker({
+        suggestedName: 'prices.json',
+        types: [{ description: 'Fichier JSON', accept: { 'application/json': ['.json'] } }]
+      });
+    } catch (err) {
+      showAlert('Enregistrement impossible.', [
+        err && err.message ? err.message : String(err),
+        'Utilisez « Télécharger une copie ».'
+      ]);
+      return;
+    }
+
+    setBusy('Enregistrement…');
+    picker.then(function(handle){
+      return writeToHandle(handle, json).then(function(){
+        activeHandle = handle;
+        setSaved(handle.name);
+        toast('Enregistré dans ' + handle.name + ' ✓');
+      });
+    }).catch(function(err){
+      if (err && err.name === 'AbortError') { toast('Enregistrement annulé'); return; }
+      showAlert('Enregistrement impossible.', [
+        err && err.message ? err.message : String(err),
+        'Utilisez « Télécharger une copie ».'
+      ]);
+    }).finally(clearBusy);
+  }
+
+  $('saveBtn').addEventListener('click', handleSaveFile);
+  $('downloadTopBtn').addEventListener('click', handleDownload);
+
+  $('resetBtn').addEventListener('click', function(){
+    if (busy) return;
+    if (!confirm('Rétablir les tarifs d\'origine ? Les modifications actuelles seront perdues.')) return;
+    render(DEFAULT_PRICING);
+    setDirty(true);
+    toast('Valeurs par défaut rétablies');
+  });
+
+  $('importBtn').addEventListener('click', function(){ importFile.click(); });
+
+  importFile.addEventListener('change', function(){
+    var file = importFile.files && importFile.files[0];
+    if (file) importJSON(file);
+    importFile.value = '';
+  });
+
+  window.addEventListener('beforeunload', function(e){
+    if (dirty) {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+  });
+
+  /* ---------------------------------- Boot ---------------------------------- */
+
+  probeSaveServer();
+  loadPrices();
+
+})();
+</script>
+</body>
+</html>

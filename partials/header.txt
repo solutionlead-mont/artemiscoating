@@ -1,0 +1,110 @@
+<!-- En-tête partagé : navigation (méga-menu) + menu mobile -->
+<header class="site-header" id="header">
+  <div class="navbar">
+    <div class="wrap navbar__inner">
+      <a class="logo" href="index.html" aria-label="Artemis Coating — accueil">
+        <svg class="logo__mark" viewBox="0 0 40 34" aria-hidden="true"><path d="M20 1 L39 33 H1 Z" fill="#C9A46A"/><path d="M20 1 L20 13 L10 29 H1 Z" fill="#8A6A3B"/><path d="M20 13 L30 29 H10 Z" fill="#111110"/></svg>
+        <span class="logo__text"><span class="logo__word">ARTEMIS</span><span class="logo__sub">COATING</span></span>
+      </a>
+
+      <nav class="nav-main" aria-label="Navigation principale">
+        <!-- Services d'installation : méga-menu -->
+            <a class="nav-link" href="index.html" data-nav="a-propos">Acceuil</a>
+        <div class="nav-item" data-dropdown>
+          <button class="nav-link" type="button" aria-expanded="false" aria-controls="mega-services">   <a  href="services-installation.html">Services d'installation</a>
+            <svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1 L5 5 L9 1"/></svg>
+          </button>
+          <div class="panel mega" id="mega-services">
+            <div class="wrap mega__inner">
+              <div class="mega__intro">
+                <span class="eyebrow">Installation clé en main</span>
+                <a class="mega__title" href="services-installation.html">Services d'installation</a>
+                <p>Des planchers époxy installés par nos équipes, du résidentiel à l'industriel.</p>
+                <a class="link-underline" href="services-installation.html">Voir tous les services →</a>
+              </div>
+              <a class="mega-card" href="installation-residentielle.html">
+                <span class="mega-card__img"><img src="assets/garage.jpg" alt="" loading="lazy"></span>
+                <span class="mega-card__name">Résidentielle <span aria-hidden="true">→</span></span>
+                <small>Garages, sous-sols, espaces de vie</small>
+              </a>
+              <a class="mega-card" href="installation-commerciale.html">
+                <span class="mega-card__img"><img src="assets/floor-roller.jpg" alt="" loading="lazy"></span>
+                <span class="mega-card__name">Commerciale <span aria-hidden="true">→</span></span>
+                <small>Commerces, salles d'exposition, bureaux</small>
+              </a>
+              <a class="mega-card" href="installation-industrielle.html">
+                <span class="mega-card__img"><img src="assets/roller-handle.jpg" alt="" loading="lazy"></span>
+                <span class="mega-card__name">Industrielle <span aria-hidden="true">→</span></span>
+                <small>Entrepôts, ateliers, usines</small>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formation : carte vedette -->
+        <div class="nav-item nav-item--training" data-dropdown>
+          <button class="nav-link" type="button" aria-expanded="false" aria-controls="panel-formation">Formation
+            <svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1 L5 5 L9 1"/></svg>
+          </button>
+          <div class="panel training" id="panel-formation">
+            <img src="assets/roller-handle.jpg" alt="" loading="lazy">
+            <div class="training__body">
+              <span class="eyebrow" style="font-size:11px">Formation professionnelle</span>
+              <a class="training__title" href="formation-epoxy-a-z.html">Époxy de A à Z</a>
+              <span class="training__sub">Application, Marketing &amp; Vente</span>
+              <span class="chips"><span>Application</span><span>Marketing</span><span>Vente</span></span>
+              <a class="btn-quote" href="formation-epoxy-a-z.html">Découvrir la formation →</a>
+            </div>
+          </div>
+        </div>
+
+        <a class="nav-link" href="produits.html" data-nav="produits">Produits <span class="shop-tag">BOUTIQUE</span></a>
+        <a class="nav-link" href="a-propos.html" data-nav="a-propos">À propos</a>
+        <a class="nav-link" href="contact.html" data-nav="contact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="icon-btn cart-link" href="panier.html" aria-label="Panier">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 6 H17 L16 18 H4 Z"/><path d="M7 6 V4.5 A3 3 0 0 1 13 4.5 V6"/></svg>
+          <span class="cart-count" data-cart-count hidden>0</span>
+        </a>
+        <a class="btn-quote btn-quote--desk" href="contact.html">Demander une soumission</a>
+        <button class="icon-btn burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" id="burger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu" aria-label="Menu mobile">
+  <div class="mm-top">
+    <a class="logo" href="index.html" aria-label="Artemis Coating — accueil">
+      <svg class="logo__mark" viewBox="0 0 40 34" aria-hidden="true"><path d="M20 1 L39 33 H1 Z" fill="#C9A46A"/><path d="M20 1 L20 13 L10 29 H1 Z" fill="#8A6A3B"/><path d="M20 13 L30 29 H10 Z" fill="#111110"/></svg>
+      <span class="logo__text"><span class="logo__word">ARTEMIS</span><span class="logo__sub">COATING</span></span>
+    </a>
+    <button class="icon-btn" type="button" aria-label="Fermer le menu" id="mm-close" style="color:var(--gold)">
+      <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 3 L17 17 M17 3 L3 17"/></svg>
+    </button>
+  </div>
+  <nav class="mm-nav">
+    <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-services">Services d'installation<span class="plus" aria-hidden="true">+</span></button>
+    <div class="mm-sub" id="acc-services">
+      <a class="all" href="services-installation.html">Tous les services <span class="gold">→</span></a>
+      <a href="installation-residentielle.html"><img src="assets/garage.jpg" alt="">Résidentielle</a>
+      <a href="installation-commerciale.html"><img src="assets/floor-roller.jpg" alt="">Commerciale</a>
+      <a href="installation-industrielle.html"><img src="assets/roller-handle.jpg" alt="">Industrielle</a>
+    </div>
+    <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-formation">Formation<span class="plus" aria-hidden="true">+</span></button>
+    <div class="mm-sub" id="acc-formation">
+      <a class="all" href="formation-epoxy-a-z.html">Époxy de A à Z : Application, Marketing &amp; Vente <span class="gold">→</span></a>
+    </div>
+    <a class="mm-row" href="produits.html">Produits <span class="shop-tag" style="font-stretch:100%;font-weight:400">BOUTIQUE</span></a>
+    <a class="mm-row" href="a-propos.html">À propos</a>
+    <a class="mm-row" href="contact.html">Contact</a>
+  </nav>
+  <div class="mm-foot">
+    <a class="mm-cart" href="panier.html">Panier <span class="cart-count" data-cart-count hidden>0</span></a>
+    <a class="btn-quote" href="contact.html">Demander une soumission</a>
+    <div class="mm-foot__line"><a href="tel:[TELEPHONE]">[TÉLÉPHONE]</a><span>FR / EN</span></div>
+  </div>
+</div>

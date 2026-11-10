@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Correctifs responsive — pages issues du design (hors accueil et estimateur).
+
+   Ces pages contiennent beaucoup de styles inline avec des largeurs, hauteurs
+   et tailles de police fixes (ex. 1440px, 120px, grilles 440px 1fr). Les règles
+   ci-dessous ne s'appliquent qu'aux petits écrans et uniquement à l'intérieur
+   de <main id="contenu">, pour ne pas toucher au menu ni au pied de page.
+   ========================================================================== */
+
+/* Certaines pages (ex. formation) utilisent un conteneur racine figé à 1440px.
+   Entre 1101 et 1439 px, cela provoque un défilement horizontal : on laisse
+   alors le conteneur s'adapter à la largeur de l'écran. */
+@media (max-width: 1439px) {
+  main#contenu x-dc > div[style*="width: 1440px"] {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Les cellules de grille et de flexbox peuvent rétrécir sous leur largeur
+     de contenu (évite qu'un long texte pousse une colonne hors de l'écran). */
+  main#contenu x-dc [style*="grid-template-columns"] > *,
+  main#contenu x-dc [style*="display: flex"] > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  /* Conteneurs généraux : neutralise les largeurs/hauteurs fixes (ex. 1440px). */
+  main#contenu x-dc > div {
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+  }
+
+  /* Sections : hauteur libre et marges internes fluides. */
+  main#contenu x-dc section {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: clamp(48px, 7vw, 96px) clamp(20px, 4vw, 48px) !important;
+  }
+
+  /* Toutes les grilles passent en une seule colonne. */
+  main#contenu x-dc [style*="grid-template-columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: clamp(24px, 4vw, 40px) !important;
+  }
+
+  /* Les rangées flexibles peuvent passer à la ligne. */
+  main#contenu x-dc [style*="display: flex"] {
+    flex-wrap: wrap !important;
+  }
+
+  /* Aucun élément ne dépasse son conteneur. */
+  main#contenu x-dc [style*="width:"] {
+    max-width: 100% !important;
+  }
+  main#contenu x-dc img,
+  main#contenu x-dc video {
+    max-width: 100%;
+  }
+
+  /* Titres fluides. */
+  main#contenu x-dc h1 {
+    font-size: clamp(34px, 7vw, 84px) !important;
+    line-height: 0.95 !important;
+  }
+  main#contenu x-dc h2 {
+    font-size: clamp(26px, 5vw, 56px) !important;
+    line-height: 1 !important;
+  }
+  main#contenu x-dc h3 {
+    font-size: clamp(20px, 4vw, 36px) !important;
+    line-height: 1.05 !important;
+  }
+
+  /* Grands textes de présentation qui ne sont pas des titres. */
+  main#contenu x-dc p[style*="font-size: 88px"],
+  main#contenu x-dc p[style*="font-size:88px"] {
+    font-size: clamp(26px, 5.5vw, 52px) !important;
+    line-height: 1.1 !important;
+  }
+
+  /* Paddings latéraux fixes (56px) des blocs internes. */
+  main#contenu x-dc [style*="padding"][style*="56px"] {
+    padding-left: clamp(20px, 4vw, 48px) !important;
+    padding-right: clamp(20px, 4vw, 48px) !important;
+  }
+  /* Paddings verticaux très larges. */
+  main#contenu x-dc [style*="padding"][style*="120px"] {
+    padding-top: clamp(56px, 8vw, 96px) !important;
+    padding-bottom: clamp(56px, 8vw, 96px) !important;
+  }
+
+  /* Contact — bloc carte « Zone desservie » : on le sort du positionnement
+     absolu (left: 56px; width: 440px) pour qu'il reste dans la page. */
+  main#contenu x-dc section:has(> div[style*="width: 440px"]) {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+    gap: 20px;
+  }
+  main#contenu x-dc section > div[style*="width: 440px"] {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  main#contenu x-dc section:has(> div[style*="width: 440px"]) > span[style*="position: absolute"] {
+    position: static !important;
+    display: block !important;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Les mots très longs (courriels, numéros) ne débordent pas. */
+  main#contenu x-dc {
+    overflow-wrap: break-word;
+  }
+
+  main#contenu x-dc h1 {
+    font-size: clamp(30px, 9vw, 56px) !important;
+  }
+  main#contenu x-dc h2 {
+    font-size: clamp(24px, 7vw, 44px) !important;
+  }
+
+  /* Boutons d'action : ils peuvent prendre toute la largeur disponible. */
+  main#contenu x-dc [style*="display: flex"] > a[style*="height"] {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* Blocs visuels à hauteur fixe : on laisse la place au contenu. */
+  main#contenu x-dc [style*="height: 480px"],
+  main#contenu x-dc [style*="height: 340px"],
+  main#contenu x-dc [style*="height: 300px"] {
+    height: auto !important;
+    min-height: 240px;
+  }
+
+  /* Les images de contenu ne gardent pas une hauteur démesurée. */
+  main#contenu x-dc figure img {
+    height: auto !important;
+    max-height: 420px;
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artemis Coating — Planchers époxy haute performance</title>
+<meta name="description" content="Installation de planchers époxy résidentiels, commerciaux et industriels, produits Artemis System et formation professionnelle Époxy de A à Z.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body >
+
+<!-- Menu partagé -->
+<div data-include="partials/header.html"></div>
+
+<main id="contenu">
+<div class="fe-estimator fe-flow">
+
+<div class="fe-hero">
+  <p class="eyebrow">Free — No Obligation</p>
+  <h1 class="s1-h1">Get an instant free estimate in 60 seconds</h1>
+  <p class="fe-hero-sub">Answer a few questions — your price updates live as you go.</p>
+</div>
+
+<!-- Horizontal progress bar -->
+<div class="fe-progress" id="feProgress">
+  <div class="fe-progress-step current" data-step="0"><span class="fe-progress-num">1</span><span class="fe-progress-label">Project</span></div>
+  <div class="fe-progress-step" data-step="1"><span class="fe-progress-num">2</span><span class="fe-progress-label">Type</span></div>
+  <div class="fe-progress-step" data-step="2"><span class="fe-progress-num">3</span><span class="fe-progress-label">Size</span></div>
+  <div class="fe-progress-step" data-step="3"><span class="fe-progress-num">4</span><span class="fe-progress-label">Quality</span></div>
+  <div class="fe-progress-step" data-step="4"><span class="fe-progress-num">5</span><span class="fe-progress-label">Contact</span></div>
+</div>
+
+<div class="fe-layout">
+
+  <!-- ============================ FORM ============================ -->
+  <div class="fe-form">
+
+    <!-- 1 · PROJECT DETAILS -->
+    <section class="fe-section" id="sec-project">
+      <div class="fe-section-head">
+        <div class="fe-num">1</div>
+        <div>
+          <h2>Where is this being installed?</h2>
+          <p class="sub">Choose the setting for your project.</p>
+        </div>
+      </div>
+      <div class="fe-section-body">
+        <div class="tile-grid cols3" id="installGrid">
+          <div class="tile" onclick="selectInstallType(this,'residential')">
+            <div class="tile-icon">🏠</div>
+            <div class="tile-name">Residential</div>
+            <div class="tile-spec">Home — indoor</div>
+          </div>
+          <div class="tile" onclick="selectInstallType(this,'commercial')">
+            <div class="tile-icon">🏢</div>
+            <div class="tile-name">Commercial</div>
+            <div class="tile-spec">Business, retail, office</div>
+          </div>
+          <div class="tile" onclick="selectInstallType(this,'industrial')">
+            <div class="tile-icon">🏭</div>
+            <div class="tile-name">Industrial</div>
+            <div class="tile-spec">Warehouse, plant, shop</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · FLOORING TYPE -->
+    <section class="fe-section" id="sec-type" hidden>
+      <div class="fe-section-head">
+        <div class="fe-num">2</div>
+        <div>
+          <h2>What type of flooring are you looking for?</h2>
+          <p class="sub">Pick a material to see its pros &amp; cons.</p>
+        </div>
+      </div>
+      <div class="fe-section-body">
+        <div class="tile-grid">
+          
+          <div class="tile ftile" data-type="epoxy" onclick="selectFlooring(this,'epoxy')">
+            <img class="tile-img" src="https://assets.flooringacquisition.com/swatches/epoxy.webp" alt="Concrete &amp; Epoxy" loading="lazy">
+            <div class="tile-name">Concrete &amp; Epoxy</div><div class="tile-spec">Garage, basement, patio</div>
+            <button type="button" class="proscons-toggle" onclick="toggleProsCons(event,this)">Pros &amp; cons <span class="pc-caret">▾</span></button>
+            <div class="proscons" onclick="event.stopPropagation()">
+              <p class="pc-desc">Seamless, ultra-tough coating — built for garages, shops, and modern spaces.</p>
+              <p class="pc-h pc-pros">Pros</p><ul class="pc-list"><li>Extremely durable — resists stains, chemicals, impact</li><li>Seamless, easy to clean</li><li>Custom colors &amp; finishes</li></ul>
+              <p class="pc-h pc-cons">Cons</p><ul class="pc-list"><li>Requires solid concrete base</li><li>Hard surface, install needs cure time</li></ul>
+              <p class="pc-colors"><strong>Popular colors:</strong> Grey, Tan / Beige, Blue-black Metallic</p>
+            </div>
+        
+    
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2b · CONCRETE CONDITION (epoxy / polished only) -->
+    <section class="fe-section" id="sec-concrete" hidden>
+      <div class="fe-section-head">
+        <div class="fe-num">+</div>
+        <div>
+          <h2>Concrete details</h2>
+          <p class="sub">This helps us price the surface preparation.</p>
+        </div>
+      </div>
+      <div class="fe-section-body">
+        <p class="tile-label" style="margin-top:0">Concrete condition?</p>
+        <div class="tile-grid cols3" id="concreteGrid">
+          <div class="tile" onclick="selectConcrete(this,'good')"><div class="tile-name">Good</div><div class="tile-spec">Flat, no major cracks</div></div>
+          <div class="tile" onclick="selectConcrete(this,'minor')"><div class="tile-name">Minor cracks</div><div class="tile-spec">Some surface cracks</div></div>
+          <div class="tile" onclick="selectConcrete(this,'major')"><div class="tile-name">Major damage</div><div class="tile-spec">Needs resurfacing</div></div>
+          <div class="tile" onclick="selectConcrete(this,'notconcrete')"><div class="tile-name">Not concrete</div><div class="tile-spec">Applying on another surface</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · SIZE -->
+    <section class="fe-section" id="sec-size" hidden>
+      <div class="fe-section-head">
+        <div class="fe-num">3</div>
+        <div>
+          <h2>How big is the area?</h2>
+          <p class="sub">Pick your rooms and the closest size — we'll confirm exact measurements at your visit.</p>
+        </div>
+      </div>
+      <div class="fe-section-body">
+        <div class="mode-section" id="residentialMode">
+          <p class="tile-label" style="margin-top:0">Which rooms?</p>
+          <p class="help-text">Choose every room you want done, then pick the closest size.</p>
+          <div id="roomList"></div>
+        </div>
+        <div class="mode-section" id="globalMode">
+          <p class="tile-label" style="margin-top:0">Approximate total square footage</p>
+          <p class="help-text">Don't know exactly? Give us your best approximate — we'll confirm at the quote.</p>
+          <div class="field" style="max-width:220px"><input type="number" inputmode="numeric" id="globalSqft" placeholder="e.g. 800" min="1" oninput="onGlobalSqft()"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · QUALITY -->
+    <section class="fe-section" id="sec-quality" hidden>
+      <div class="fe-section-head">
+        <div class="fe-num">4</div>
+        <div>
+          <h2>What quality level are you looking for?</h2>
+          <p class="sub">Pick the level that fits your budget — you can adjust at the in-home visit.</p>
+        </div>
+      </div>
+      <div class="fe-section-body">
+        <div class="tile-grid cols3" id="tierGrid"></div>
+      </div>
+    </section>
+
+    <!-- 5 · CONTACT -->
+    <section class="fe-section" id="sec-contact" hidden>
+      <div class="fe-section-head">
+        <div class="fe-num">5</div>
+        <div>
+          <h2>Book your free in-home visit</h2>
+          <p class="sub">Your price is already shown at right — leave your details to confirm the visit.</p>
+        </div>
+      </div>
+      <div class="fe-section-body">
+        <div id="contactFormBody">
+          <div class="row2">
+            <div class="field"><label>First name</label><input type="text" id="firstName" placeholder="John" required></div>
+            <div class="field"><label>Last name</label><input type="text" id="lastName" placeholder="Smith" required></div>
+          </div>
+          <div class="field"><label>Phone number</label><div class="phone-wrap"><span class="phone-prefix">+1</span><input type="tel" id="phone" placeholder="(555) 123-4567" required></div><p id="phone-error" class="error">Enter a valid 10-digit phone number.</p></div>
+          <div class="field"><label>Email</label><input type="email" id="email" placeholder="john@email.com" required><p id="email-error" class="error">Enter a valid email address.</p></div>
+          <div class="field" style="max-width:180px"><label>Zip code</label><input type="text" id="zip" placeholder="90210" maxlength="5" inputmode="numeric" required><p id="zip-error" class="error">Enter a valid 5-digit zip code.</p></div>
+          <p class="tile-label" style="margin-top:1.25rem">Select a day of the week where you are most likely to be available</p>
+          <div class="day-grid">
+            <div class="day-tile" onclick="selectDay(this,'Monday')">Monday</div>
+            <div class="day-tile" onclick="selectDay(this,'Tuesday')">Tuesday</div>
+            <div class="day-tile" onclick="selectDay(this,'Wednesday')">Wednesday</div>
+            <div class="day-tile" onclick="selectDay(this,'Thursday')">Thursday</div>
+            <div class="day-tile" onclick="selectDay(this,'Friday')">Friday</div>
+            <div class="day-tile" onclick="selectDay(this,'Saturday')">Saturday</div>
+          </div>
+          <p class="tile-label" style="margin-top:1.25rem">Preferred time</p>
+          <div class="tile-grid" id="timeGrid">
+            <div class="tile" onclick="selectTime(this,'Morning')"><div class="tile-icon">🌅</div><div class="tile-name">Morning</div><div class="tile-spec">Before noon</div></div>
+            <div class="tile" onclick="selectTime(this,'Afternoon')"><div class="tile-icon">☀️</div><div class="tile-name">Afternoon</div><div class="tile-spec">After noon</div></div>
+          </div>
+          <p id="s5error" class="error">Please complete all fields, and choose a day and time.</p>
+          <button class="btn" id="feSubmit" onclick="submitLead()">Send my request →</button>
+          <p class="privacy">🔒 Your information is private and will only be shared with your local flooring contractor.</p>
+        </div>
+        <div class="fe-success" id="feSuccess" hidden>
+          <div class="fe-success-icon">✓</div>
+          <h3>Request received</h3>
+          <p id="feSuccessText">Your contractor will call you to schedule your free in-home quote.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ============================ LIVE PRICE ============================ -->
+  <aside class="fe-summary" id="feSummary">
+    <div class="fe-summary-inner">
+      <p class="eyebrow">Your live estimate</p>
+      <div class="fe-price is-empty" id="fePrice">—</div>
+      <p class="fe-price-note" id="fePriceNote">Choose where it's installed and your flooring type to start.</p>
+      <div class="breakdown" id="breakdownCard"></div>
+      <p class="fe-waste">Prices include a ~10% material waste factor.</p>
+      <a href="tel:+15550000000" class="btn call-btn">📞 Call my contractor</a>
+      <p class="call-note">Schedule an in-home final quote. No payment required. The in-home visit is free — your contractor just needs to see the space to give you a precise number.</p>
+    </div>
+  </aside>
+
+</div>
+
+</div>
+
+<script>
+// ===================================================================
+// Artemis estimator — single-page progressive flow.
+// Sections reveal one after another, no back button, and the price
+// updates live whenever any criterion changes.
+// Pricing logic is unchanged (prices.json / admin.html).
+// ===================================================================
+const CLIENT_NAME = 'Floor Engine Demo';
+
+// Base tier rates $/sqft [min,max] — 10% waste already integrated, so calc on RAW sqft.
+// These are DEFAULTS only: the live values are loaded from prices.json (edited via admin.html).
+let BASE_PRICING = {
+  hardwood:  {entry:[6,10],  mid:[10,16], premium:[16,25]},
+  engineered:{entry:[5,9],   mid:[9,14],  premium:[14,22]},
+  lvp:       {entry:[4,6],   mid:[6,9],   premium:[9,13]},
+  laminate:  {entry:[3,6],   mid:[5,8],   premium:[8,11]},
+  ceramic:   {entry:[7,11],  mid:[11,18], premium:[18,35]},
+  stone:     {entry:[14,20], mid:[20,32], premium:[32,60]},
+  carpet:    {entry:[2,4],   mid:[4,6],   premium:[6,10]},
+  epoxy:     {entry:[4,7],   mid:[5,9],   premium:[8,15]},
+  polished:  {entry:[3,5],   mid:[5,8],   premium:[8,12]}
+};
+// Per-sqft surcharges added on top of the base tier rate — labels + [min,max]
+let SURCHARGES = {
+  commercial:       {label:'Commercial installation', min:2,   max:4},
+  industrial:       {label:'Industrial installation', min:3,   max:6},
+  outdoor_nonepoxy: {label:'Outdoor installation',    min:3,   max:6},
+  outdoor_epoxy_uv: {label:'Outdoor UV coating',      min:1.5, max:3},
+  concrete_minor:   {label:'Concrete — minor cracks', min:1,   max:2.5},
+  concrete_major:   {label:'Concrete — major repair', min:3,   max:6}
+};
+const NAMES={hardwood:'Hardwood',engineered:'Engineered Wood',lvp:'LVP / SPC',laminate:'Laminate',ceramic:'Ceramic / Porcelain',stone:'Natural Stone',carpet:'Carpet',epoxy:'Concrete & Epoxy',polished:'Polished Concrete'};
+const INSTALL_OPTIONS={
+  residential:{name:'Residential',spec:'Home — indoor'},
+  commercial:{name:'Commercial',spec:'Business, retail, office'},
+  industrial:{name:'Industrial',spec:'Warehouse, plant, shop'}
+};
+
+// --- Live pricing: loaded from prices.json, editable via admin.html (falls back to defaults above) ---
+function applyPricing(d){
+  if(!d||typeof d!=='object')return;
+  if(d.basePricing&&typeof d.basePricing==='object')BASE_PRICING=d.basePricing;
+  if(d.surcharges&&typeof d.surcharges==='object')SURCHARGES=d.surcharges;
+}
+function loadPricing(){
+  return fetch('estimateur/prices.json',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(d){applyPricing(d);updateEstimate();})
+    .catch(function(e){console.warn('[estimateur] prices.json indisponible — tarifs par défaut utilisés.',e);});
+}
+
+let state={firstName:'',lastName:'',phone:'',email:'',zip:'',flooring:'',installType:'',concreteCond:'',rooms:[],room:'',sqft:0,tier:'',day:'',time:''};
+let submitted=false;
+
+// --- Progressive sections -------------------------------------------------
+var revealed={type:false,size:false,quality:false,contact:false};
+function reveal(key){
+  if(revealed[key])return;
+  revealed[key]=true;
+  var el=document.getElementById('sec-'+key);
+  if(!el)return;
+  el.hidden=false;
+  el.classList.add('is-new');
+  setTimeout(function(){el.classList.remove('is-new');},400);
+}
+function syncSections(){
+  if(state.installType)reveal('type');
+  if(state.flooring)reveal('size');
+  syncConcrete();
+  if(sizeValid())reveal('quality');
+  if(state.tier)reveal('contact');
+  markSections();
+  updateProgress();
+}
+function syncConcrete(){
+  var el=document.getElementById('sec-concrete');
+  if(!el)return;
+  var need=typeHasConcrete(state.flooring);
+  el.hidden=!need;
+  if(!need){
+    state.concreteCond='';
+    document.querySelectorAll('#concreteGrid .tile').forEach(function(t){t.classList.remove('sel');});
+  }
+}
+function markSections(){
+  var map={project:!!state.installType,type:!!state.flooring,size:sizeValid(),quality:!!state.tier,contact:submitted};
+  Object.keys(map).forEach(function(k){
+    var el=document.getElementById('sec-'+k);
+    if(el)el.classList.toggle('is-done',!!map[k]);
+  });
+}
+function updateProgress(){
+  var done=[!!state.installType,!!state.flooring,sizeValid(),!!state.tier,submitted];
+  var first=done.indexOf(false);
+  document.querySelectorAll('.fe-progress-step').forEach(function(el,i){
+    var isDone=done[i]&&i!==first;
+    var isCurrent=i===first;
+    el.classList.toggle('done',isDone);
+    el.classList.toggle('current',isCurrent);
+    var n=el.querySelector('.fe-progress-num');
+    if(n)n.textContent=done[i]?'✓':String(i+1);
+  });
+}
+function sizeValid(){
+  if(state.installType==='residential'){
+    return state.rooms.length>0&&state.rooms.every(function(r){return r.sqft>0;});
+  }
+  if(state.installType==='commercial'||state.installType==='industrial')return num(state.sqft)>0;
+  return false;
+}
+function typeHasConcrete(type){return type==='epoxy'||type==='polished';}
+
+// --- Section 1: project details (residential / commercial / industrial) ---
+function selectInstallType(el,value){
+  document.querySelectorAll('#installGrid .tile').forEach(function(t){t.classList.remove('sel');});
+  el.classList.add('sel');
+  state.installType=value;
+  renderSqftMode();
+  syncSections();
+  updateEstimate();
+}
+
+// --- Section 2: flooring type ---
+function selectFlooring(el,type){
+  document.querySelectorAll('#sec-type .ftile').forEach(function(t){t.classList.remove('sel');});
+  el.classList.add('sel');
+  state.flooring=type;
+  renderTiers();
+  syncConcrete();
+  syncSections();
+  updateEstimate();
+}
+function toggleProsCons(e,btn){e.stopPropagation();var box=btn.nextElementSibling;if(box){box.classList.toggle('show');btn.classList.toggle('open');}}
+
+// --- Concrete condition ---
+function selectConcrete(el,cond){
+  el.closest('.tile-grid').querySelectorAll('.tile').forEach(function(t){t.classList.remove('sel');});
+  el.classList.add('sel');
+  state.concreteCond=cond;
+  syncSections();
+  updateEstimate();
+}
+
+// --- Tier swatch image (resolver) + label/spec per type x tier ---
+var TIER_ORDER=['entry','mid','premium'];
+var TIER_IMAGE_STEM={ceramic:'ceramic',stone:'stone',carpet:'carpet',epoxy:'epoxy',polished:'polished-concrete'};
+var TYPE_IMAGE={hardwood:'hardwood.webp',engineered:'engineered-wood.webp',lvp:'lvp-spc.webp',laminate:'laminate.webp',ceramic:'ceramic.webp',stone:'natural-stone.webp',carpet:'carpet.webp',epoxy:'epoxy.webp',polished:'polished-concrete.webp'};
+function tierImage(type,tier){
+  if(TIER_IMAGE_STEM[type])return 'https://assets.flooringacquisition.com/swatches/'+TIER_IMAGE_STEM[type]+'-'+tier+'.webp';
+  return 'https://assets.flooringacquisition.com/swatches/'+(TYPE_IMAGE[type]||'');
+}
+var TIER_LABELS={
+  hardwood:{entry:'Select Oak, straight lay — classic oak, the most affordable real solid wood.',mid:'White Oak / Hard Maple, diagonal lay — harder woods, a designer diagonal layout.',premium:'Walnut / Hickory / Exotic, chevron or herringbone — premium species, statement patterns.'},
+  engineered:{entry:'3-ply, click-lock floating — real wood surface at the best price.',mid:'5-ply wide plank, glued or nailed — thicker, more stable, wider planks.',premium:'9-ply Baltic birch, wide plank — maximum stability, thick real-wood top layer.'},
+  lvp:{entry:'LVP 4mm, click-lock floating — fully waterproof, smart budget choice.',mid:'SPC 6mm rigid core — tougher core, resists dents, hides subfloor flaws.',premium:'SPC 8mm commercial grade — thickest, quietest, heavy-traffic durable.'},
+  laminate:{entry:'AC3 8mm, standard — great wood-look for low-traffic rooms.',mid:'AC4 12mm, premium underlayment — thicker, feels solid, handles busier areas.',premium:'AC5 12mm waterproof — top wear rating, waterproof core.'},
+  ceramic:{entry:'Ceramic 12x12, straight lay — clean, waterproof, budget-friendly.',mid:'Porcelain 24x24, offset lay — larger, denser, fewer grout lines.',premium:'Rectified large-format / imported, custom pattern — designer herringbone or custom.'},
+  stone:{entry:'Travertine / Slate, standard format — natural stone at an accessible price.',mid:'Marble, large format tight joints — timeless marble, seamless install.',premium:'Exotic stone (Onyx / Quartzite), polished on-site — rare, dramatic, ultimate luxury.'},
+  carpet:{entry:'Builder-grade polyester, cut pile — soft, warm, budget-friendly.',mid:'Nylon textured, stain-resistant — durable, holds up to families.',premium:'Wool or patterned, high-traffic grade — softest, longest-lasting.'},
+  epoxy:{entry:'Solid color 2-coat — clean, seamless, durable single-color finish.',mid:'Flake / chip broadcast — decorative flake, hides wear, adds grip.',premium:'Metallic / 3D decorative — custom metallic, high-gloss showpiece.'},
+  polished:{entry:'Grind + densify, 400-grit satin — smooth satin finish, clean and modern.',mid:'800-grit semi-gloss + dye — added sheen and color, richer look.',premium:'1500–3000 grit high-gloss + decorative — mirror-like gloss, striking premium finish.'}
+};
+function tiersForType(type){var labs=TIER_LABELS[type]||{},cfg={hardwood:1,engineered:1,lvp:1,laminate:1,ceramic:1,stone:1,carpet:1,epoxy:1,polished:1};if(!cfg[type])return [];return TIER_ORDER.filter(function(t){return labs[t];});}
+function renderTiers(){
+  var type=state.flooring,grid=document.getElementById('tierGrid');
+  var tiers=type?tiersForType(type):[];
+  if(!grid)return;
+  if(!tiers.length){grid.innerHTML='';return;}
+  grid.innerHTML=tiers.map(function(t){var name=t.charAt(0).toUpperCase()+t.slice(1);
+    return '<div class="tile tier-tile'+(state.tier===t?' sel':'')+'" onclick="selectTier(this,\''+t+'\')">'
+      +'<img class="tier-img" src="'+tierImage(type,t)+'" alt="'+name+'" loading="lazy">'
+      +'<div class="tile-name">'+name+'</div>'
+      +'<div class="tile-spec">'+(TIER_LABELS[type][t]||'')+'</div>'
+      +'</div>';
+  }).join('');
+}
+function selectTier(el,tier){
+  document.querySelectorAll('#tierGrid .tile').forEach(function(t){t.classList.remove('sel');});
+  el.classList.add('sel');
+  state.tier=tier;
+  syncSections();
+  updateEstimate();
+}
+
+// --- Section 3: residential room multi-select with per-room size CHOICE ---
+var ROOMS=[
+  {name:'Living room',s:200,a:330,l:500},
+  {name:'Bedroom',s:120,a:200,l:320},
+  {name:'Kitchen',s:100,a:175,l:300},
+  {name:'Bathroom',s:40,a:70,l:120},
+  {name:'Basement',s:500,a:800,l:1200},
+  {name:'Garage',s:240,a:400,l:620}
+];
+function roomSlug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+function roomRef(id){for(var i=0;i<ROOMS.length;i++){if(roomSlug(ROOMS[i].name)===id)return ROOMS[i];}return null;}
+var roomChoice={};
+function renderRooms(){
+  var list=document.getElementById('roomList');if(!list)return;
+  list.innerHTML=ROOMS.map(function(r){var id=roomSlug(r.name);
+    return '<div class="room-row">'
+      +'<label class="room-check"><input type="checkbox" id="rc-'+id+'" onchange="toggleRoom(\''+id+'\')"><span class="rc-name">'+r.name+'</span></label>'
+      +'<div class="room-sqft" id="rs-'+id+'" hidden>'
+        +'<label>'+r.name+' — how big?</label>'
+        +'<div class="choice-grid">'
+          +'<button type="button" class="choice" data-val="s" onclick="selectRoomSize(\''+id+'\',\'s\')">Small ~'+r.s+' sq ft</button>'
+          +'<button type="button" class="choice" data-val="a" onclick="selectRoomSize(\''+id+'\',\'a\')">Average ~'+r.a+' sq ft</button>'
+          +'<button type="button" class="choice" data-val="l" onclick="selectRoomSize(\''+id+'\',\'l\')">Large ~'+r.l+' sq ft</button>'
+          +'<button type="button" class="choice" data-val="other" onclick="selectRoomSize(\''+id+'\',\'other\')">Other — enter sq ft</button>'
+        +'</div>'
+        +'<div class="room-other" id="ro-'+id+'" hidden>'
+          +'<input type="number" inputmode="numeric" min="1" id="rsi-'+id+'" placeholder="Enter sq ft" oninput="recomputeRooms();syncSections();updateEstimate()">'
+        +'</div>'
+      +'</div></div>';
+  }).join('');
+}
+function toggleRoom(id){
+  var cb=document.getElementById('rc-'+id),box=document.getElementById('rs-'+id);
+  if(cb.checked){box.removeAttribute('hidden');}
+  else{
+    box.setAttribute('hidden','');delete roomChoice[id];
+    var other=document.getElementById('ro-'+id);if(other)other.setAttribute('hidden','');
+    var inp=document.getElementById('rsi-'+id);if(inp)inp.value='';
+    box.querySelectorAll('.choice').forEach(function(c){c.classList.remove('sel');});
+  }
+  recomputeRooms();syncSections();updateEstimate();
+}
+function selectRoomSize(id,mode){
+  var box=document.getElementById('rs-'+id);if(!box)return;
+  box.querySelectorAll('.choice').forEach(function(c){c.classList.toggle('sel',c.getAttribute('data-val')===mode);});
+  var other=document.getElementById('ro-'+id);
+  if(mode==='other'){
+    if(other)other.removeAttribute('hidden');
+    roomChoice[id]={mode:'other'};
+    var inp=document.getElementById('rsi-'+id);if(inp)inp.focus();
+  }else{
+    if(other)other.setAttribute('hidden','');
+    var r=roomRef(id),v=r?(mode==='s'?r.s:mode==='a'?r.a:r.l):0;
+    roomChoice[id]={mode:mode,val:v};
+  }
+  recomputeRooms();syncSections();updateEstimate();
+}
+function recomputeRooms(){
+  var rooms=[],total=0,parts=[];
+  ROOMS.forEach(function(r){var id=roomSlug(r.name),cb=document.getElementById('rc-'+id);
+    if(cb&&cb.checked){
+      var ch=roomChoice[id],v=0;
+      if(ch){ if(ch.mode==='other'){var inp=document.getElementById('rsi-'+id);v=inp?(parseInt(inp.value,10)||0):0;} else {v=ch.val||0;} }
+      rooms.push({name:r.name,sqft:v});total+=v;parts.push(r.name+' ('+v+' sq ft)');
+    }
+  });
+  state.rooms=rooms;state.sqft=total;state.room=parts.join(', ');
+}
+function onGlobalSqft(){
+  var v=parseInt(document.getElementById('globalSqft').value,10)||0;
+  state.sqft=v;state.rooms=[];
+  var label=state.installType==='industrial'?'Industrial':'Commercial';
+  state.room=v>0?(label+' — '+v+' sq ft'):label;
+  syncSections();updateEstimate();
+}
+function resetRooms(){
+  ROOMS.forEach(function(r){var id=roomSlug(r.name),cb=document.getElementById('rc-'+id),box=document.getElementById('rs-'+id),inp=document.getElementById('rsi-'+id),other=document.getElementById('ro-'+id);
+    if(cb)cb.checked=false;if(box){box.setAttribute('hidden','');box.querySelectorAll('.choice').forEach(function(c){c.classList.remove('sel');});}if(inp)inp.value='';if(other)other.setAttribute('hidden','');delete roomChoice[id];});
+  state.rooms=[];
+}
+function resetGlobal(){var g=document.getElementById('globalSqft');if(g)g.value='';}
+function renderSqftMode(){
+  var res=document.getElementById('residentialMode'),glob=document.getElementById('globalMode'),it=state.installType;
+  if(it==='residential'){
+    glob.classList.remove('show');res.classList.add('show');recomputeRooms();
+  }
+  else if(it==='commercial'||it==='industrial'){
+    res.classList.remove('show');glob.classList.add('show');
+    var g=document.getElementById('globalSqft');
+    if(g&&!(parseInt(g.value,10)>0)&&state.sqft>0)g.value=state.sqft;
+    onGlobalSqft();
+  }
+  else{resetRooms();resetGlobal();res.classList.remove('show');glob.classList.remove('show');state.sqft=0;state.room='';}
+}
+
+// --- Contact / availability ---
+function selectDay(el,day){document.querySelectorAll('.fe-estimator .day-tile').forEach(function(t){t.classList.remove('sel');});el.classList.add('sel');state.day=day;}
+function selectTime(el,time){document.querySelectorAll('#timeGrid .tile').forEach(function(t){t.classList.remove('sel');});el.classList.add('sel');state.time=time;}
+
+// --- Estimate math ---
+function num(v){if(typeof v==='number')return v;if(v==null)return 0;var n=parseFloat(String(v).replace(',','.'));return isNaN(n)?0:n;}
+function fmt(n){return (Math.round(num(n)*100)/100).toString();}
+function bdRow(k,v){return '<div class="bd-row"><span class="bd-key">'+k+'</span><span class="bd-val">'+v+'</span></div>';}
+function installLabel(){var it=state.installType;return it==='residential'?'Residential':it==='commercial'?'Commercial':it==='industrial'?'Industrial':'';}
+function concreteLabel(c){return c==='good'?'Good':c==='minor'?'Minor cracks':c==='major'?'Major damage':c==='notconcrete'?'Not concrete — other surface':'';}
+function tierRate(type,tier){
+  var b=BASE_PRICING[type];if(!b||!b[tier])return null;
+  var r=b[tier];
+  if(Array.isArray(r))return [num(r[0]),num(r[1])];
+  return [num(r.min),num(r.max)];
+}
+function activeSurcharges(){
+  var type=state.flooring,it=state.installType,cond=state.concreteCond,list=[];
+  function add(key,fallbackLabel){
+    var v=SURCHARGES[key];if(!v)return;
+    var min=Array.isArray(v)?v[0]:v.min,max=Array.isArray(v)?v[1]:v.max;
+    var label=(!Array.isArray(v)&&v.label)?v.label:fallbackLabel;
+    list.push({label:label,min:num(min),max:num(max)});
+  }
+  if(it==='commercial')add('commercial','Commercial installation');
+  if(it==='industrial')add('industrial','Industrial installation');
+  if(type==='epoxy'||type==='polished'){
+    if(cond==='minor')add('concrete_minor','Concrete — minor cracks');
+    else if(cond==='major')add('concrete_major','Concrete — major repair');
+  }
+  return list;
+}
+function breakdownString(){var b=state.estimateBreakdown;if(!b)return null;var parts=['base $'+b.baseRate[0]+'-'+b.baseRate[1]+'/sqft'];b.surcharges.forEach(function(s){parts.push(s.label+' +$'+fmt(s.min)+'-'+fmt(s.max));});parts.push(b.sqft+' sqft');return parts.join('; ');}
+
+function computeEstimate(){
+  var type=state.flooring,tier=state.tier,sqft=num(state.sqft),base=tierRate(type,tier);
+  if(!type||!tier||!base||sqft<=0)return null;
+  var surs=activeSurcharges();
+  var rateMin=base[0],rateMax=base[1];
+  surs.forEach(function(s){rateMin+=num(s.min);rateMax+=num(s.max);});
+  var tMin=Math.round(rateMin*sqft),tMax=Math.round(rateMax*sqft);
+  state.estimateMin=tMin;state.estimateMax=tMax;
+  state.estimateBreakdown={baseRate:[base[0],base[1]],surcharges:surs.map(function(s){return {label:s.label,min:num(s.min),max:num(s.max)};}),sqft:sqft,rate:[rateMin,rateMax]};
+  return {min:tMin,max:tMax,base:base,surcharges:surs,sqft:sqft,rate:[rateMin,rateMax]};
+}
+function priceHint(){
+  if(!state.installType)return 'Choose where it’s installed to start.';
+  if(!state.flooring)return 'Pick your flooring type to continue.';
+  if(!sizeValid())return state.installType==='residential'?'Select your rooms and their sizes.':'Enter the approximate square footage.';
+  if(!state.tier)return 'Pick a quality level to see your price.';
+  return 'Your price is ready.';
+}
+function updateEstimate(){
+  var b=computeEstimate();
+  var price=document.getElementById('fePrice'),note=document.getElementById('fePriceNote'),bd=document.getElementById('breakdownCard');
+  if(!price||!note||!bd)return;
+  if(!b){
+    price.textContent='—';
+    price.classList.add('is-empty');
+    note.textContent=priceHint();
+    bd.innerHTML='';
+    return;
+  }
+  price.textContent='$'+b.min.toLocaleString()+' – $'+b.max.toLocaleString();
+  price.classList.remove('is-empty');
+  var tierName=state.tier.charAt(0).toUpperCase()+state.tier.slice(1);
+  note.textContent='Based on '+NAMES[state.flooring]+' · '+tierName+' · '+b.sqft+' sqft'+(state.room?' · '+state.room:'');
+  var rows=bdRow('Flooring type',NAMES[state.flooring])+bdRow('Quality tier',tierName)+bdRow('Install type',installLabel());
+  if((state.flooring==='epoxy'||state.flooring==='polished')&&state.concreteCond)rows+=bdRow('Concrete condition',concreteLabel(state.concreteCond));
+  rows+=bdRow('Area',state.room||'—')+bdRow('Square footage',b.sqft+' sqft');
+  rows+=bdRow('Base rate','$'+b.base[0]+'–$'+b.base[1]+'/sqft');
+  b.surcharges.forEach(function(s){rows+=bdRow(s.label,'+$'+fmt(s.min)+'–'+fmt(s.max)+'/sqft');});
+  rows+='<div class="total-row"><span class="total-label">Estimated total</span><span class="total-val">$'+b.min.toLocaleString()+' – $'+b.max.toLocaleString()+'</span></div>';
+  bd.innerHTML=rows;
+}
+
+// --- Contact form validation + submit ---
+function setFieldError(id){var el=document.getElementById(id);if(el)el.classList.add('invalid');var e=document.getElementById(id+'-error');if(e)e.classList.add('show');}
+function clearFieldError(id){var el=document.getElementById(id);if(el)el.classList.remove('invalid');var e=document.getElementById(id+'-error');if(e)e.classList.remove('show');}
+function normalizePhoneDigits(v){var d=(''+v).replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);return d.slice(0,10);}
+function submitLead(){
+  var fn=document.getElementById('firstName').value.trim(),ln=document.getElementById('lastName').value.trim(),ph=document.getElementById('phone').value.trim(),em=document.getElementById('email').value.trim(),zp=document.getElementById('zip').value.trim();
+  var err=document.getElementById('s5error'),ok=true;
+  clearFieldError('phone');clearFieldError('email');clearFieldError('zip');
+  if(!fn||!ln||!ph||!em||!zp)ok=false;
+  var phoneDigits=normalizePhoneDigits(ph);
+  if(phoneDigits.length!==10){setFieldError('phone');ok=false;}
+  if(em.indexOf('@')===-1){setFieldError('email');ok=false;}
+  if(!/^\d{5}$/.test(zp)){setFieldError('zip');ok=false;}
+  if(!state.day||!state.time)ok=false;
+  if(!computeEstimate())ok=false;
+  if(!ok){err.classList.add('show');return;}
+  err.classList.remove('show');
+  Object.assign(state,{firstName:fn,lastName:ln,phone:'+1'+phoneDigits,email:em,zip:zp});
+  submitted=true;
+  updateEstimate();
+  logLeadPayload();
+  document.getElementById('contactFormBody').style.display='none';
+  var box=document.getElementById('feSuccess');
+  var txt=document.getElementById('feSuccessText');
+  if(txt)txt.innerHTML='Thanks <strong>'+fn+'</strong> — your request is in. <strong>'+CLIENT_NAME+'</strong> will call you <strong>'+state.day+' '+(state.time==='Morning'?'morning':'afternoon')+'</strong> to confirm your free in-home quote.';
+  if(box)box.hidden=false;
+  syncSections();
+}
+function logLeadPayload(){
+  var payload={
+    firstName:state.firstName,lastName:state.lastName,phone:state.phone,email:state.email,zip:state.zip,
+    lead_type:'complete',
+    flooring_type:state.flooring,install_type:state.installType,room:state.room,square_footage:state.sqft,
+    tier:tierWithSpec(),preferred_day:state.day,preferred_time:state.time,
+    concrete_condition:state.concreteCond||null,
+    estimate_min:state.estimateMin,estimate_max:state.estimateMax,estimate_breakdown:breakdownString()
+  };
+  // Prototype only — no webhook POST.
+  console.log('[estimatedemo] lead payload (prototype — NOT sent to any webhook):', payload);
+}
+var TIER_SPEC={
+  hardwood:{entry:'Select Oak — straight lay',mid:'White Oak / Hard Maple — diagonal lay',premium:'Walnut / Hickory / Exotic — chevron or herringbone'},
+  engineered:{entry:'3-ply 3/8" — click-lock floating',mid:'5-ply 1/2" wide plank — glued or nailed',premium:'9-ply Baltic birch 3/4" wide plank — glued'},
+  lvp:{entry:'LVP 4mm wear layer — click-lock floating',mid:'SPC 6mm wear layer — click-lock',premium:'SPC 8mm commercial grade — glue-down or floating'},
+  laminate:{entry:'AC3 8mm — standard underlayment',mid:'AC4 12mm — premium underlayment',premium:'AC5 12mm waterproof — heavy traffic'},
+  ceramic:{entry:'Ceramic 12x12 — straight lay',mid:'Porcelain 24x24 — straight or offset',premium:'Rectified porcelain large format / imported — herringbone or custom'},
+  stone:{entry:'Travertine / Slate — standard format',mid:'Marble — large format tight joints',premium:'Exotic stone (Onyx / Quartzite) — custom pattern polished on-site'},
+  carpet:{entry:'Builder-grade polyester — cut pile',mid:'Nylon textured / stain-resistant',premium:'Wool or patterned / high-traffic commercial grade'},
+  epoxy:{entry:'Solid color 2-coat system',mid:'Flake / chip broadcast system',premium:'Metallic / 3D decorative system'},
+  polished:{entry:'Grind + densify + 400-grit satin',mid:'800-grit semi-gloss + dye',premium:'1500-3000 grit high-gloss + decorative/dye'}
+};
+function tierWithSpec(){var t=state.tier;if(!t)return t||'';var m=TIER_SPEC[state.flooring],spec=m&&m[t];return spec?(t+' - '+spec):t;}
+
+// Init
+(function(){
+  loadPricing();
+  renderRooms();
+  renderTiers();
+  syncSections();
+  updateEstimate();
+  var phoneEl=document.getElementById('phone');
+  if(phoneEl)phoneEl.addEventListener('input',function(){
+    var d=normalizePhoneDigits(this.value),out='';
+    if(d.length>=1)out='('+d.slice(0,3);
+    if(d.length>=4)out+=') '+d.slice(3,6);
+    if(d.length>=7)out+='-'+d.slice(6,10);
+    this.value=out;clearFieldError('phone');
+  });
+  var zipEl=document.getElementById('zip');
+  if(zipEl)zipEl.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'').slice(0,5);clearFieldError('zip');});
+  var emailEl=document.getElementById('email');
+  if(emailEl)emailEl.addEventListener('input',function(){clearFieldError('email');});
+})();
+</script>
+</main>
+
+<div data-include="partials/footer.html"></div>
+
+<script src="js/include.js"></script>
+<script src="js/main.js"></script>
+<script src="js/script.js"></script>
+</body>
+
+</html>
