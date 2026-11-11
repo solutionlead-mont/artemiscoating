@@ -9,7 +9,7 @@
 
       <nav class="nav-main" aria-label="Navigation principale">
         <!-- Services d'installation : méga-menu -->
-            <a class="nav-link" href="index.html" data-nav="a-propos">Acceuil</a>
+            <a class="nav-link" href="index.html" data-nav="a-propos">Accueil</a>
         <div class="nav-item" data-dropdown>
           <button class="nav-link" type="button" aria-expanded="false" aria-controls="mega-services">   <a  href="services-installation.html">Services d'installation</a>
             <svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1 L5 5 L9 1"/></svg>
@@ -94,6 +94,7 @@
       <a href="installation-commerciale.html"><img src="assets/floor-roller.jpg" alt="">Commerciale</a>
       <a href="installation-industrielle.html"><img src="assets/roller-handle.jpg" alt="">Industrielle</a>
     </div>
+    <a class="mm-row" href="index.html">Accueil</a>
     <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-formation">Formation<span class="plus" aria-hidden="true">+</span></button>
     <div class="mm-sub" id="acc-formation">
       <a class="all" href="formation-epoxy-a-z.html">Époxy de A à Z : Application, Marketing &amp; Vente <span class="gold">→</span></a>
