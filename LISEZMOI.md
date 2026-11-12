@@ -12,6 +12,8 @@ Le menu et le pied de page sont écrits **une seule fois**, puis insérés autom
 ```
 artemis-site/
 ├── index.html              ← la page d'accueil
+├── produits.html           ← boutique (catalogue Shopify en direct)
+├── produit.html            ← fiche produit (image, variantes, quantité, ajout au panier)
 ├── panier.html             ← page du panier
 ├── gabarit-page.html       ← modèle à copier pour créer les autres pages
 ├── partials/
@@ -19,8 +21,12 @@ artemis-site/
 │   └── footer.txt          ← pied de page
 ├── css/style.css           ← tous les styles
 ├── css/cart.css            ← styles de la page panier
+├── css/boutique.css        ← styles du catalogue produits
+├── css/produit.css         ← styles de la fiche produit
 ├── css/responsive-pages.css ← correctifs responsive des pages de contenu
 ├── js/include.js           ← le script qui insère le menu et le pied de page
+├── js/shopify.js           ← Storefront API Shopify (catalogue + paiement)
+├── js/produit.js           ← logique de la fiche produit (variantes, galerie, quantité)
 ├── js/main.js              ← menus déroulants, barre collante, menu mobile, formulaire, panier
 ├── estimateur.html         ← estimateur de prix
 ├── estimateur/prices.json  ← tarifs de l'estimateur
@@ -71,22 +77,71 @@ Le menu et le pied de page ne sont pas modifiés par cette feuille.
 
 La page `panier.html` a sa propre feuille `css/cart.css` : sous 900 px, la liste et le résumé passent en une seule colonne et le résumé n'est plus collant ; sous 560 px, les vignettes et les titres réduisent pour rester lisibles sur téléphone.
 
-## Panier (boutique)
+## Boutique Shopify (produits, panier et paiement)
 
-Le panier est **entièrement côté navigateur** : aucun serveur ni base de données n'est nécessaire.
+La boutique est branchée sur **Shopify Storefront API** : le catalogue est lu en direct dans Shopify, et le bouton de paiement crée un panier Shopify (`cartCreate`) puis redirige vers le paiement sécurisé Shopify.
 
-- Sur `produits.html`, chaque bouton « Ajouter » porte l'attribut `data-add-to-cart`. Le script `js/main.js` lit le nom, la catégorie, l'image et le prix de la carte produit, puis enregistre l'article.
-- Les articles sont conservés dans le `localStorage` du navigateur sous la clé **`artemis-cart-v1`**. Un même produit ajouté plusieurs fois augmente sa quantité au lieu de créer un doublon.
-- La pastille de quantité s'affiche automatiquement dans l'icône panier du menu et dans le menu mobile. Elle se met à jour sur toutes les pages après le chargement des partials.
-- `panier.html` affiche les articles, permet d'augmenter/diminuer les quantités, de retirer une ligne ou de vider le panier. Le résumé et le bouton « Demander une soumission » renvoient vers `contact.html`.
-- Les prix des produits sont encore des espaces réservés (`[PRIX]`). Dans ce cas, le panier affiche **« Prix sur demande »** et **« Sur demande »** au lieu d'un montant. Dès qu'un prix numérique sera écrit dans la carte (par exemple `49,99 $`), le total sera calculé automatiquement.
-- Pour repartir de zéro pendant les tests : ouvrez la console du navigateur et exécutez `localStorage.removeItem('artemis-cart-v1')`, puis rechargez la page.
+### Fichiers concernés
+
+- `produits.html` : grille de produits rendue par `js/shopify.js` (recherche, filtres, tri, variantes). Un clic sur l'image ou le titre ouvre la fiche du produit.
+- `produit.html` : fiche produit rendue par `js/produit.js` à partir du paramètre `?handle=…` (grande image, galerie, variantes, prix, quantité, ajout au panier, description, caractéristiques, produits similaires).
+- `panier.html` : panier local, résumé, bouton « Passer à la caisse ».
+- `js/shopify.js` : configuration, requête GraphQL du catalogue, rendu des cartes, création du panier Shopify.
+- `js/produit.js` : requête `product(handle:)`, variantes, galerie, prix, description, produits similaires.
+- `js/main.js` : panier `localStorage`, ajout d'articles, interception du bouton de paiement.
+- `css/boutique.css` : styles du catalogue.
+- `css/produit.css` : styles de la fiche produit.
+
+### Brancher la boutique (une seule fois)
+
+> **Boutique actuelle :** `kqa3nt-0d.myshopify.com`. Le jeton public est déjà inscrit dans `js/shopify.js`. Le produit **Signature 401** est en ligne et visible sur le site. Ajoutez les autres produits dans Shopify et publiez-les sur le canal « Boutique en ligne » pour qu'ils apparaissent automatiquement.
+
+1. Dans Shopify : **Paramètres → Applications et canaux de vente → Développer des applications → Créer une application**.
+2. Ouvrez **Configurer l'API Storefront**, cochez les scopes :
+   - `unauthenticated_read_product_listings` (lire les produits) ;
+   - `unauthenticated_write_checkouts` (créer le panier et le paiement).
+3. Enregistrez, puis copiez le **jeton public** « Storefront API access token ».
+4. Dans `js/shopify.js`, remplissez les deux premières valeurs de `CONFIG` :
+
+```js
+var CONFIG = Object.assign({
+  domain: 'votre-boutique.myshopify.com',
+  storefrontToken: 'jeton-public-storefront',
+  apiVersion: '2026-07',
+  locale: 'fr-CA',
+  currency: 'CAD'
+}, window.ARTEMIS_SHOPIFY || {});
+```
+
+5. Dans la configuration de l'application Shopify, autorisez les domaines du site : `localhost`, `127.0.0.1`, le domaine Cloudflare Pages (`*.pages.dev`) et le domaine final.
+6. Rechargez `produits.html` : les produits apparaissent.
+
+**Tant que `domain` et `storefrontToken` sont vides**, la page produits affiche le message « Boutique en ligne bientôt disponible » et le panier renvoie vers `contact.html` (« Demander une soumission »). Aucune erreur n'est visible pour le visiteur.
+
+### Fiche produit
+
+- L'adresse est `produit.html?handle=HANDLE` (ex. `produit.html?handle=signature-401`). Le lien est posé sur l'image et le titre de chaque carte du catalogue.
+- La page interroge la Storefront API (`product(handle:)`) et affiche : galerie, prix, variantes, quantité, stock, description Shopify, caractéristiques, livraison/retours et produits similaires.
+- Le bouton « Ajouter au panier » utilise le même mécanisme que le catalogue (`data-variant-id`, `data-price`, `data-qty`) ; la quantité choisie est respectée dans le panier.
+- Si le produit n'existe pas ou n'est plus publié, la page affiche un état « Produit introuvable » avec un retour vers le catalogue.
+
+### Fonctionnement du panier
+
+- Sur `produits.html`, chaque carte affiche l'image, le titre et le prix, et toute la carte ouvre la fiche produit. Le choix de la variante et l'ajout au panier se font sur la fiche.
+- Les articles sont conservés dans le `localStorage` sous la clé **`artemis-cart-v1`** (`variantId`, `variantTitle`, `price`, `currency`, `qty`).
+- Le bouton « Passer à la caisse » crée le panier Shopify avec `cartCreate`, puis redirige vers `checkoutUrl`. En cas d'échec (jeton sans droit d'écriture, réseau), le script utilise le **lien panier Shopify** classique (`https://boutique.myshopify.com/cart/ID_VARIANTE:QUANTITÉ`).
+- Les taxes et la livraison sont calculées par Shopify **à l'étape du paiement** ; le panier local affiche seulement le sous-total.
+- Pour repartir de zéro : `localStorage.removeItem('artemis-cart-v1')` dans la console, puis rechargez.
+
+### Mode sans Shopify
+
+Si la boutique n'est pas configurée (ou si l'API est indisponible), tout le site continue de fonctionner : la page produits affiche un message d'attente avec un lien vers `contact.html`, et le panier propose « Demander une soumission ».
 
 ## Estimateur et gestion des prix
 
 L'estimateur se trouve dans `estimateur.html` (à la racine, lien depuis la page d'accueil). Il lit ses tarifs dans `estimateur/prices.json`.
 
-- L'estimateur est un **parcours unique** : les sections s'affichent l'une sous l'autre au fur et à mesure (Projet → Type de plancher → Superficie → Qualité → Contact), sans bouton Retour. Le prix se met à jour **en direct** dès qu'un critère change, et reste visible dans la carte de droite (au-dessus sur mobile).
+- L'estimateur est un **parcours unique** : les sections s'affichent l'une sous l'autre au fur et à mesure (Projet → Type de plancher → Superficie → **Coordonnées** → Qualité → Contact), sans bouton Retour. Les coordonnées (prénom + courriel, avec une mention au lieu d'une case de consentement) sont demandées **au milieu du parcours, juste avant le choix de la qualité**, pour que le prix apparaisse immédiatement après. Le prix se calcule dans la carte de droite (au-dessus sur mobile), sans verrou ni flou.
 - Trois types d'installation : **résidentiel, commercial et industriel**. La surcharge `industrial` se règle dans `prices.json` (section « surcharges ») et apparaît dans l'admin.
 - Les styles de l'estimateur sont dans `css/style.css`, sous la classe `.fe-estimator`. Un bloc d'isolation à la fin de `style.css` annule les styles globaux du site **à l'intérieur de l'estimateur uniquement** (le reste du site n'est pas affecté).
 - Pour modifier les prix : ouvrez `estimateur/admin.html`, changez les valeurs, puis cliquez sur **Enregistrer dans prices.json**.
@@ -97,6 +152,13 @@ L'estimateur se trouve dans `estimateur.html` (à la racine, lien depuis la page
 - Le serveur local (`serveur-enregistrement.js`) sert aussi tout le site sur `http://127.0.0.1:8090/`. Il écoute uniquement sur `127.0.0.1` et n'est pas destiné à la production.
 - Comme l'estimateur et l'admin utilisent `fetch()`, ces pages doivent être ouvertes **via un serveur** (`http://`), pas en double-cliquant (`file://`).
 
+### Capture des demandes (leads) et GoHighLevel
+
+- Le prénom et le courriel sont demandés **à l'étape 4, juste avant la qualité**. Une mention indique que demander l'estimation vaut consentement à être contacté au sujet du projet (aucune case à cocher). Le lead `estimate_started` est envoyé dès cette étape, puis `booking` à la réservation de la visite.
+- Les demandes sont pour l'instant conservées **dans le navigateur du visiteur** (`localStorage`, clé `artemis_leads`) et affichées dans la console. **Elles ne sont pas encore envoyées à l'entreprise.**
+- Pour brancher GoHighLevel : dans `estimateur.html`, remplacez `var LEAD_WEBHOOK_URL = '';` par l'URL du webhook entrant de votre CRM. Chaque demande (`estimate_started` et `booking`) sera alors envoyée en JSON à GoHighLevel.
+- La page `politique-de-confidentialite.html` contient la politique de confidentialité (Loi 25 / LPRPDE) liée à la mention de consentement.
+
 ## Mise en ligne sur Cloudflare Pages
 
 Le site est **statique** (HTML/CSS/JS + `prices.json`) : il se publie tel quel sur **Cloudflare Pages**, gratuitement, sans base de données. Le panier, l'estimateur et le site fonctionnent normalement.
@@ -105,8 +167,10 @@ Le site est **statique** (HTML/CSS/JS + `prices.json`) : il se publie tel quel s
 
 Cloudflare publie **tout** le dossier envoyé. Préparez une copie du site **sans** les outils locaux :
 
-- à exclure : `serveur-enregistrement.js`, `Demarrer-le-site.bat`, `estimateur/save-prices.php`, `estimateur/prices.backup.json`, `estimateur/prices.json.tmp`, `LISEZMOI.md`, `gabarit-page.html`, `estimateur/estimateur-old-standalone.html` (facultatif) ;
+- à exclure : `serveur-enregistrement.js`, `Demarrer-le-site.bat`, `estimateur/save-prices.php`, `estimateur/prices.backup.json`, `estimateur/prices.json.tmp`, `estimateur/admin.html`, `estimateur/estimateur-old-standalone.html`, `LISEZMOI.md`, `gabarit-page.html`, `README.md`, `CNAME`, le dossier `.git` et tout dossier de copie imbriqué (`artemis-site/`) ;
 - conservez tout le reste : `*.html`, `css/`, `js/`, `partials/*.txt`, `assets/`, `estimateur/prices.json`.
+
+> L'admin `estimateur/admin.html` est volontairement exclu : il n'a pas de mot de passe et doit rester en local (WAMP). Pour le modifier en ligne plus tard, voir « Protéger l'admin ».
 
 Exemple sous Windows (PowerShell), depuis le dossier `artemis-site` :
 
@@ -115,7 +179,13 @@ $src = Get-Location
 $dst = Join-Path $env:TEMP "artemis-publication"
 Remove-Item $dst -Recurse -Force -ErrorAction SilentlyContinue
 Copy-Item $src $dst -Recurse
-Remove-Item "$dst\serveur-enregistrement.js","$dst\Demarrer-le-site.bat","$dst\estimateur\save-prices.php","$dst\estimateur\prices.backup.json","$dst\estimateur\prices.json.tmp","$dst\LISEZMOI.md","$dst\gabarit-page.html" -Force -ErrorAction SilentlyContinue
+$exclude = @(
+  "serveur-enregistrement.js","Demarrer-le-site.bat","LISEZMOI.md","gabarit-page.html","README.md","CNAME",
+  "estimateur\save-prices.php","estimateur\prices.backup.json","estimateur\prices.json.tmp",
+  "estimateur\admin.html","estimateur\estimateur-old-standalone.html"
+)
+foreach ($f in $exclude) { Remove-Item (Join-Path $dst $f) -Force -ErrorAction SilentlyContinue }
+Remove-Item "$dst\.git","$dst\artemis-site" -Recurse -Force -ErrorAction SilentlyContinue
 explorer $dst
 ```
 
@@ -136,10 +206,10 @@ Sur Cloudflare Pages, l'admin **ne peut pas écrire** dans le `prices.json` du s
 
 ### 4. Protéger l'admin
 
-`estimateur/admin.html` n'a **pas de mot de passe**. Sur Cloudflare, deux options :
+`estimateur/admin.html` n'a **pas de mot de passe**. Il est donc **exclu du dossier publié** : l'admin reste accessible uniquement en local via WAMP. Si vous voulez un jour le publier, deux options :
 
 - **Cloudflare Access (Zero Trust)** : créez une application Access sur le domaine et une règle qui n'autorise que votre e-mail sur le chemin `/estimateur/admin.html`. Les visiteurs non autorisés sont bloqués avant même de voir la page.
-- **Plus simple :** supprimez `estimateur/admin.html` du dossier publié. Vous garderez l'admin uniquement en local.
+- **Ou** gardez-le hors ligne et modifiez les prix en local, puis republiez `estimateur/prices.json`.
 
 ### 5. Modifier les prix directement en ligne (facultatif)
 
@@ -154,6 +224,9 @@ Cloudflare le permet avec **Pages Functions** + **KV** (ou R2) : une petite API 
 ## À remplacer avant la mise en ligne
 - `[TÉLÉPHONE]`, `tel:[TELEPHONE]`, `[COURRIEL]`, `mailto:[COURRIEL]`, `LICENCE RBQ [XXXX-XXXX-XX]`
 - Les liens Facebook, Instagram et TikTok (`href="#"`)
-- `[PRIX]` et les noms `[Produit Artemis System …]`
+- `[PRIX]` et les noms `[Produit Artemis System …]` sur `index.html` et `formation-epoxy-a-z.html` (la page `produits.html` lit désormais les vrais produits Shopify)
+- `domain` et `storefrontToken` dans `js/shopify.js` (voir « Brancher la boutique »)
+- `LEAD_WEBHOOK_URL` dans `estimateur.html` quand GoHighLevel sera prêt
 - `assets/pour.mp4` : la vidéo de fond est un test, à remplacer par la vidéo validée au CDC2
 - Les liens vers les pages pas encore créées (`installation-residentielle.html`, `estimateur.html`, etc.)
+- Les pages `termes-et-conditions.html` et `politique-de-retours.html` restent à créer (liens actuellement sans cible).

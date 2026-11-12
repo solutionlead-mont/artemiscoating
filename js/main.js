@@ -163,10 +163,10 @@
     return cartRead().reduce(function (sum, item) { return sum + (item.qty || 1); }, 0);
   }
 
-  function cartMoney(value) {
+  function cartMoney(value, currency) {
     if (value == null || !isFinite(value)) return null;
     try {
-      return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: 'CAD' }).format(value);
+      return new Intl.NumberFormat('fr-CA', { style: 'currency', currency: currency || 'CAD' }).format(value);
     } catch (err) { return value.toFixed(2) + ' $'; }
   }
 
@@ -199,6 +199,26 @@
 
   function cartProductFrom(btn) {
     var card = btn.closest('article');
+    var d = btn.dataset || {};
+
+    /* Produit Shopify : les données viennent des attributs data-* de la carte. */
+    if (d.variantId) {
+      var fallbackName = card && card.querySelector('h2')
+        ? card.querySelector('h2').textContent.replace(/\s+/g, ' ').trim()
+        : 'Produit';
+      return {
+        id: d.variantId,
+        variantId: d.variantId,
+        variantTitle: d.variantTitle || '',
+        name: d.name || fallbackName,
+        meta: d.meta || '',
+        image: d.image || '',
+        price: d.price != null && d.price !== '' ? parseFloat(d.price) : null,
+        currency: d.currency || 'CAD',
+        qty: Math.max(1, parseInt(d.qty, 10) || 1)
+      };
+    }
+
     if (!card) return null;
     var nameEl = card.querySelector('h2');
     // Le premier span du bloc d'information (à côté du h2) est la catégorie,
@@ -215,31 +235,39 @@
       name: name,
       meta: meta,
       image: image,
-      price: cartParsePrice(priceEl ? priceEl.textContent : '')
+      price: cartParsePrice(priceEl ? priceEl.textContent : ''),
+      currency: 'CAD'
     };
   }
 
   function cartAdd(product) {
     if (!product) return;
     var list = cartRead();
+    var addQty = Math.max(1, parseInt(product.qty, 10) || 1);
     var found = null;
     for (var i = 0; i < list.length; i++) {
       if (list[i].id === product.id) { found = list[i]; break; }
     }
     if (found) {
-      found.qty = (found.qty || 1) + 1;
+      found.qty = (found.qty || 1) + addQty;
       found.price = product.price;
       found.name = product.name;
       found.meta = product.meta;
       found.image = product.image;
+      found.variantId = product.variantId;
+      found.variantTitle = product.variantTitle;
+      found.currency = product.currency;
     } else {
       list.push({
         id: product.id,
+        variantId: product.variantId || null,
+        variantTitle: product.variantTitle || '',
         name: product.name,
         meta: product.meta,
         image: product.image,
         price: product.price,
-        qty: 1
+        currency: product.currency || 'CAD',
+        qty: addQty
       });
     }
     cartWrite(list);
@@ -311,15 +339,19 @@
 
     itemsEl.innerHTML = list.map(function (item) {
       var qty = item.qty || 1;
-      var unit = cartMoney(item.price);
-      var line = item.price != null ? cartMoney(item.price * qty) : null;
+      var unit = cartMoney(item.price, item.currency);
+      var line = item.price != null ? cartMoney(item.price * qty, item.currency) : null;
+      var meta = item.meta || '';
+      if (item.variantTitle && item.variantTitle !== 'Default Title') {
+        meta = meta ? meta + ' · ' + item.variantTitle : item.variantTitle;
+      }
       return '' +
         '<article class="cart-item">' +
           (item.image
             ? '<a class="cart-item__media" href="produits.html"><img src="' + cartEscape(item.image) + '" alt="' + cartEscape(item.name) + '" loading="lazy"></a>'
             : '<span class="cart-item__media cart-item__media--empty" aria-hidden="true"></span>') +
           '<div class="cart-item__info">' +
-            (item.meta ? '<span class="cart-item__meta">' + cartEscape(item.meta) + '</span>' : '') +
+            (meta ? '<span class="cart-item__meta">' + cartEscape(meta) + '</span>' : '') +
             '<h2 class="cart-item__name">' + cartEscape(item.name) + '</h2>' +
             '<span class="cart-item__unit">' + (unit || 'Prix sur demande') + '</span>' +
             '<div class="cart-item__controls">' +
@@ -341,26 +373,68 @@
       if (item.price == null) allPriced = false;
       else subtotal += item.price * (item.qty || 1);
     });
-    var total = allPriced ? cartMoney(subtotal) : null;
+    var currency = list.length ? (list[0].currency || 'CAD') : 'CAD';
+    var total = allPriced ? cartMoney(subtotal, currency) : null;
     var subtotalEl = document.querySelector('[data-cart-subtotal]');
     var totalEl = document.querySelector('[data-cart-total]');
     var noteEl = document.querySelector('[data-cart-note]');
     if (subtotalEl) subtotalEl.textContent = total || 'Sur demande';
     if (totalEl) totalEl.textContent = total || 'Sur demande';
     if (noteEl) noteEl.textContent = allPriced
-      ? 'Taxes et livraison à confirmer.'
+      ? (shopifyConfigured()
+        ? 'Taxes et livraison calculées à l\'étape du paiement.'
+        : 'Taxes et livraison à confirmer.')
       : 'Certains prix sont à confirmer : nous vous enverrons une soumission détaillée.';
+  }
+
+  /* Le libellé du bouton dépend de la configuration Shopify :
+     paiement en ligne si la boutique est branchée, soumission sinon. */
+  function shopifyConfigured() {
+    return !!(window.ArtemisShopify && window.ArtemisShopify.configured && window.ArtemisShopify.configured());
+  }
+
+  function cartSyncCheckout() {
+    var btn = document.querySelector('[data-cart-checkout]');
+    if (!btn) return;
+    btn.textContent = shopifyConfigured() ? 'Passer à la caisse →' : 'Demander une soumission →';
+    if (!shopifyConfigured()) btn.setAttribute('href', 'contact.html');
   }
 
   function cartRefresh() {
     cartUpdateBadges();
     if (document.querySelector('[data-cart-page]')) cartRender();
+    cartSyncCheckout();
   }
 
   function initCart() {
     if (!window.__artemisCart) {
       window.__artemisCart = true;
       document.addEventListener('click', function (e) {
+        /* Bouton de paiement : Shopify si configuré, sinon lien vers contact.html. */
+        var checkout = e.target.closest && e.target.closest('[data-cart-checkout]');
+        if (checkout && shopifyConfigured()) {
+          e.preventDefault();
+          if (checkout.getAttribute('data-busy') === '1') return;
+          var list = cartRead();
+          if (!list.length) return;
+          var checkoutLabel = checkout.getAttribute('data-label') || checkout.textContent;
+          checkout.setAttribute('data-label', checkoutLabel);
+          checkout.setAttribute('data-busy', '1');
+          checkout.setAttribute('aria-busy', 'true');
+          checkout.textContent = 'Redirection…';
+          window.ArtemisShopify.checkout(list).then(function () {
+            /* Redirection vers le checkout Shopify en cours. */
+          }).catch(function (err) {
+            console.warn('[Artemis] Paiement Shopify indisponible :', err);
+            checkout.removeAttribute('data-busy');
+            checkout.removeAttribute('aria-busy');
+            checkout.textContent = checkoutLabel;
+            window.alert('Le paiement en ligne est momentanément indisponible. Nous vous redirigeons vers le formulaire de contact.');
+            window.location.href = 'contact.html';
+          });
+          return;
+        }
+
         var add = e.target.closest && e.target.closest('[data-add-to-cart]');
         if (add) {
           e.preventDefault();
@@ -394,6 +468,14 @@
     }
     cartRefresh();
   }
+
+  /* API publique du panier (utilisée par js/shopify.js et la page panier). */
+  window.ArtemisCart = {
+    read: cartRead,
+    write: cartWrite,
+    refresh: cartRefresh,
+    money: cartMoney
+  };
 
   /* ---------- 6. Divers ---------- */
   function initMisc() {

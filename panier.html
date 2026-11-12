@@ -29,7 +29,7 @@
     <header class="cart-head">
       <span class="eyebrow">Boutique</span>
       <h1>Votre panier</h1>
-      <p>Vérifiez vos produits, ajustez les quantités, puis demandez une soumission.</p>
+      <p>Vérifiez vos produits, ajustez les quantités, puis passez à la caisse.</p>
     </header>
 
     <div class="cart-layout" data-cart-content>
@@ -47,11 +47,11 @@
         <dl>
           <div><dt>Articles</dt><dd><span data-cart-count-label>0</span></dd></div>
           <div><dt>Sous-total</dt><dd data-cart-subtotal>Sur demande</dd></div>
-          <div><dt>Livraison</dt><dd>À confirmer</dd></div>
+          <div><dt>Livraison</dt><dd>Calculée au paiement</dd></div>
           <div class="cart-total"><dt>Total</dt><dd data-cart-total>Sur demande</dd></div>
         </dl>
-        <p class="cart-note" data-cart-note>Certains prix sont à confirmer : nous vous enverrons une soumission détaillée.</p>
-        <a class="btn btn--gold cart-checkout" href="contact.html">Demander une soumission →</a>
+        <p class="cart-note" data-cart-note>Taxes et livraison calculées à l'étape du paiement.</p>
+        <a class="btn btn--gold cart-checkout" href="contact.html" data-cart-checkout>Passer à la caisse →</a>
       </aside>
     </div>
 
@@ -67,6 +67,7 @@
 <div data-include="partials/footer.html"></div>
 
 <script src="js/include.js"></script>
-<script src="js/main.js"></script>
+<script src="js/shopify.js?v=20261115"></script>
+<script src="js/main.js?v=20261113"></script>
 </body>
 </html>

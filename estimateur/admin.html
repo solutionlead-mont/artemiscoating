@@ -189,7 +189,7 @@ h2{font-size:16px;font-weight:700;line-height:1.3}
       <section class="card">
         <div class="card-head">
           <h2>Tarifs de base</h2>
-          <p>Prix par pied carré ($/sqft), fourchette min – max. Ces tarifs incluent déjà le facteur de perte matière (~10 %).</p>
+          <p>Prix par pied carré ($/pi²), fourchette min – max. Ces tarifs incluent déjà le facteur de perte matière (~10 %).</p>
         </div>
         <div class="type-grid" id="baseGrid"></div>
       </section>
@@ -197,7 +197,7 @@ h2{font-size:16px;font-weight:700;line-height:1.3}
       <section class="card">
         <div class="card-head">
           <h2>Suppléments</h2>
-          <p>Montants ajoutés au tarif de base, en $/sqft. Le libellé apparaît dans le détail de l'estimation.</p>
+          <p>Montants ajoutés au tarif de base, en $/pi². Le libellé apparaît dans le détail de l'estimation.</p>
         </div>
         <div class="sur-grid" id="surGrid"></div>
       </section>
@@ -225,11 +225,11 @@ h2{font-size:16px;font-weight:700;line-height:1.3}
   var TIERS = ['entry','mid','premium'];
   var SURCHARGE_KEYS = ['commercial','industrial','outdoor_nonepoxy','outdoor_epoxy_uv','concrete_minor','concrete_major'];
   var TYPE_NAMES = {
-    hardwood:'Hardwood', engineered:'Engineered Wood', lvp:'LVP / SPC', laminate:'Laminate',
-    ceramic:'Ceramic / Porcelain', stone:'Natural Stone', carpet:'Carpet',
-    epoxy:'Concrete & Epoxy', polished:'Polished Concrete'
+    hardwood:'Bois franc', engineered:'Bois d’ingénierie', lvp:'LVP / SPC', laminate:'Stratifié',
+    ceramic:'Céramique / Porcelaine', stone:'Pierre naturelle', carpet:'Tapis',
+    epoxy:'Béton et époxy', polished:'Béton poli'
   };
-  var TIER_NAMES = { entry:'Entry', mid:'Mid', premium:'Premium' };
+  var TIER_NAMES = { entry:'Essentiel', mid:'Intermédiaire', premium:'Premium' };
 
   // Valeurs d'origine — identiques aux tarifs par défaut de estimateur.html
   var DEFAULT_PRICING = {
@@ -246,12 +246,12 @@ h2{font-size:16px;font-weight:700;line-height:1.3}
       polished:  {entry:[3,5],   mid:[5,8],   premium:[8,12]}
     },
     surcharges: {
-      commercial:       {label:'Commercial installation', min:2,   max:4},
-      industrial:       {label:'Industrial installation', min:3,   max:6},
-      outdoor_nonepoxy: {label:'Outdoor installation',    min:3,   max:6},
-      outdoor_epoxy_uv: {label:'Outdoor UV coating',      min:1.5, max:3},
-      concrete_minor:   {label:'Concrete — minor cracks', min:1,   max:2.5},
-      concrete_major:   {label:'Concrete — major repair', min:3,   max:6}
+      commercial:       {label:'Installation commerciale', min:2,   max:4},
+      industrial:       {label:'Installation industrielle', min:3,   max:6},
+      outdoor_nonepoxy: {label:'Installation extérieure',    min:3,   max:6},
+      outdoor_epoxy_uv: {label:'Revêtement extérieur UV',      min:1.5, max:3},
+      concrete_minor:   {label:'Béton — fissures mineures', min:1,   max:2.5},
+      concrete_major:   {label:'Béton — réparation majeure', min:3,   max:6}
     }
   };
 
@@ -362,10 +362,10 @@ h2{font-size:16px;font-weight:700;line-height:1.3}
     return '<div class="sur-row">'
       + '<label class="sur-label"><span>Libellé</span><input type="text" maxlength="80"'
         + ' data-kind="sur-label" data-key="' + key + '" aria-label="Libellé du supplément ' + esc(key) + '"></label>'
-      + '<label class="num"><span>Min $/sqft</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
+      + '<label class="num"><span>Min $/pi²</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
         + ' data-kind="sur" data-key="' + key + '" data-bound="min" aria-label="Supplément ' + esc(key) + ' minimum"></label>'
       + '<span class="unit">–</span>'
-      + '<label class="num"><span>Max $/sqft</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
+      + '<label class="num"><span>Max $/pi²</span><input type="number" min="0" max="10000" step="0.01" inputmode="decimal"'
         + ' data-kind="sur" data-key="' + key + '" data-bound="max" aria-label="Supplément ' + esc(key) + ' maximum"></label>'
     + '</div>';
   }

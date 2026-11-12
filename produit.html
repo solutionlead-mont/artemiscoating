@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Produit — Artemis Coating</title>
+<meta name="description" content="Fiche produit Artemis Coating : description, formats, prix et achat en ligne sécurisé.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive-pages.css">
+<link rel="stylesheet" href="css/boutique.css?v=20261116">
+<link rel="stylesheet" href="css/produit.css?v=20261116">
+</head>
+<body data-page="produits">
+  <a href="#contenu" class="sr-only">Aller au contenu</a>
+
+<!-- Menu partagé -->
+<div data-include="partials/header.html"></div>
+
+<main id="contenu" class="pdp" data-product-page>
+
+  <!-- ===================== CHARGEMENT ===================== -->
+  <div class="pdp-loading wrap" data-pdp-loading>
+    <div class="pdp-loading__media" aria-hidden="true"></div>
+    <div class="pdp-loading__info" aria-hidden="true">
+      <span class="pdp-skel pdp-skel--sm"></span>
+      <span class="pdp-skel pdp-skel--title"></span>
+      <span class="pdp-skel pdp-skel--line"></span>
+      <span class="pdp-skel pdp-skel--line"></span>
+      <span class="pdp-skel pdp-skel--price"></span>
+      <span class="pdp-skel pdp-skel--button"></span>
+    </div>
+  </div>
+
+  <!-- ===================== ERREUR ===================== -->
+  <div class="pdp-state wrap" data-pdp-error hidden>
+    <span class="pdp-state__eyebrow">Boutique</span>
+    <h1 data-pdp-error-title>Produit introuvable</h1>
+    <p data-pdp-error-text>Ce produit n'existe pas ou n'est plus disponible.</p>
+    <div class="pdp-state__actions">
+      <a class="btn btn--gold" href="produits.html">Voir tous les produits →</a>
+      <button type="button" class="shop-retry" data-pdp-retry hidden>Réessayer</button>
+    </div>
+  </div>
+
+  <!-- ===================== FICHE ===================== -->
+  <div class="pdp-main wrap" data-pdp-main hidden>
+    <nav class="shop-crumbs pdp-crumbs" aria-label="Fil d'Ariane">
+      <a href="index.html">ACCUEIL</a>
+      <span aria-hidden="true">/</span>
+      <a href="produits.html">PRODUITS</a>
+      <span aria-hidden="true">/</span>
+      <span class="gold" data-pdp-crumb>PRODUIT</span>
+    </nav>
+
+    <div class="pdp-grid">
+
+      <!-- Galerie -->
+      <div class="pdp-gallery">
+        <div class="pdp-gallery__main">
+          <img data-pdp-image src="" alt="" width="800" height="800" decoding="async">
+          <span class="pdp-gallery__badge" data-pdp-badge hidden></span>
+        </div>
+        <div class="pdp-gallery__thumbs" data-pdp-thumbs hidden></div>
+      </div>
+
+      <!-- Informations -->
+      <div class="pdp-info">
+        <span class="pdp-eyebrow" data-pdp-meta></span>
+        <h1 class="pdp-title" data-pdp-title></h1>
+        <p class="pdp-lead" data-pdp-lead></p>
+
+        <div class="pdp-price" data-pdp-price></div>
+        <p class="pdp-taxes">Taxes et livraison calculées au paiement.</p>
+
+        <form class="pdp-buy" data-pdp-form novalidate>
+          <label class="pdp-variants" data-pdp-options-wrap hidden>
+            <span class="pdp-label">Format</span>
+            <select data-pdp-variant aria-label="Choisir le format"></select>
+          </label>
+
+          <div class="pdp-buy__row">
+            <div class="pdp-qty" role="group" aria-label="Quantité">
+              <button type="button" data-pdp-qty="dec" aria-label="Diminuer la quantité">−</button>
+              <input type="number" value="1" min="1" step="1" inputmode="numeric" aria-label="Quantité" data-pdp-qty-input>
+              <button type="button" data-pdp-qty="inc" aria-label="Augmenter la quantité">+</button>
+            </div>
+
+            <button type="button" class="pdp-add" data-add-to-cart
+              data-product-id="" data-variant-id="" data-variant-title=""
+              data-price="" data-currency="CAD" data-image="" data-name="" data-meta="" data-qty="1">
+              Ajouter au panier
+            </button>
+          </div>
+        </form>
+
+        <p class="pdp-stock" data-pdp-stock></p>
+
+        <ul class="pdp-assurance">
+          <li><span aria-hidden="true">✓</span> Paiement sécurisé par Shopify</li>
+          <li><span aria-hidden="true">✓</span> Ramassage ou livraison au Québec</li>
+          <li><span aria-hidden="true">✓</span> Conseil d'application par nos experts</li>
+        </ul>
+
+        <div class="pdp-help">
+          <span class="pdp-help__title">Besoin d'aide pour choisir ?</span>
+          <p>Décrivez votre projet : nous vous recommandons le bon produit et la bonne quantité.</p>
+          <a href="contact.html">Parler à un expert →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Détails -->
+    <div class="pdp-details" data-pdp-details>
+      <section class="pdp-details__main">
+        <h2>Description</h2>
+        <div class="pdp-description" data-pdp-description></div>
+      </section>
+
+      <aside class="pdp-details__side">
+        <details class="pdp-acc" open>
+          <summary>Caractéristiques</summary>
+          <dl class="pdp-specs" data-pdp-specs></dl>
+        </details>
+
+        <details class="pdp-acc">
+          <summary>Livraison et retours</summary>
+          <div class="pdp-acc__body">
+            <p>Livraison calculée au paiement selon votre région. Ramassage possible sur rendez-vous.</p>
+            <p>Un produit non ouvert et non utilisé peut être retourné dans les 30 jours, sur présentation de la facture. Les produits mélangés ou appliqués ne sont pas admissibles.</p>
+          </div>
+        </details>
+
+        <details class="pdp-acc">
+          <summary>Besoin d'un volume important ?</summary>
+          <div class="pdp-acc__body">
+            <p>Pour les chantiers et les commandes en volume, écrivez-nous pour obtenir des conditions adaptées.</p>
+            <a class="pdp-acc__link" href="contact.html">Demander une soumission →</a>
+          </div>
+        </details>
+      </aside>
+    </div>
+
+    <!-- Produits similaires -->
+    <section class="pdp-related" data-pdp-related hidden>
+      <div class="pdp-related__head">
+        <h2>Vous aimerez aussi</h2>
+        <a href="produits.html">Tous les produits →</a>
+      </div>
+      <div class="shop-grid" data-pdp-related-grid></div>
+    </section>
+  </div>
+
+</main>
+
+<div data-include="partials/footer.html"></div>
+
+<script src="js/include.js"></script>
+<script src="js/shopify.js?v=20261115"></script>
+<script src="js/produit.js?v=20261113"></script>
+<script src="js/main.js?v=20261113"></script>
+</body>
+</html>

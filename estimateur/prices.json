@@ -19,32 +19,32 @@
   },
   "surcharges": {
     "commercial": {
-      "label": "Commercial installation",
+      "label": "Installation commerciale",
       "min": 2,
       "max": 4
     },
     "industrial": {
-      "label": "Industrial installation",
+      "label": "Installation industrielle",
       "min": 3,
       "max": 6
     },
     "outdoor_nonepoxy": {
-      "label": "Outdoor installation",
+      "label": "Installation extérieure",
       "min": 3,
       "max": 6
     },
     "outdoor_epoxy_uv": {
-      "label": "Outdoor UV coating",
+      "label": "Revêtement extérieur UV",
       "min": 1.5,
       "max": 3
     },
     "concrete_minor": {
-      "label": "Concrete — minor cracks",
+      "label": "Béton — fissures mineures",
       "min": 1,
       "max": 2.5
     },
     "concrete_major": {
-      "label": "Concrete — major repair",
+      "label": "Béton — réparation majeure",
       "min": 3,
       "max": 6
     }
