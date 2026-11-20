@@ -12,11 +12,8 @@
   <div class="wrap footer__main">
     <div class="footer__cols">
       <div class="footer__brand">
-        <!-- TODO: remplacer par le logo du client -->
         <a class="logo" href="index.html" aria-label="Artemis Coating — accueil">
-          <svg width="44" height="38" viewBox="0 0 40 34" aria-hidden="true"><path d="M20 1 L39 33 H1 Z" fill="#C9A46A"/><path d="M20 1 L20 13 L10 29 H1 Z" fill="#8A6A3B"/><path d="M20 13 L30 29 H10 Z" fill="#0B0B0A"/></svg>
-          <span class="logo__word" style="font-size:24px">ARTEMIS</span>
-          <span class="logo__sub" style="font-size:9px">COATING</span>
+          <img class="logo__img" src="assets/logo-artemis.png?v=20261123b" alt="Artemis Coating" width="112" height="64">
         </a>
         <p>Produits, installation et formation : l'expertise époxy complète, au service des particuliers et des professionnels.</p>
         <p class="quote">La référence de l’époxy au Québec depuis plus de 20 ans.</p>

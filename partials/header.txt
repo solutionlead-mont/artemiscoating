@@ -2,10 +2,8 @@
 <header class="site-header" id="header">
   <div class="navbar">
     <div class="wrap navbar__inner">
-      <!-- TODO: remplacer par le logo du client -->
       <a class="logo" href="index.html" aria-label="Artemis Coating — accueil">
-        <svg class="logo__mark" viewBox="0 0 40 34" aria-hidden="true"><path d="M20 1 L39 33 H1 Z" fill="#C9A46A"/><path d="M20 1 L20 13 L10 29 H1 Z" fill="#8A6A3B"/><path d="M20 13 L30 29 H10 Z" fill="#111110"/></svg>
-        <span class="logo__text"><span class="logo__word">ARTEMIS</span><span class="logo__sub">COATING</span></span>
+        <img class="logo__img" src="assets/logo-artemis.png?v=20261123b" alt="Artemis Coating" width="112" height="64">
       </a>
 
       <nav class="nav-main" aria-label="Navigation principale">
@@ -24,17 +22,17 @@
                 <a class="link-underline" href="services-installation.html">Voir tous les services →</a>
               </div>
               <a class="mega-card" href="installation-residentielle.html">
-                <span class="mega-card__img"><img src="assets/finitions/hero-residentiel.svg" alt="" loading="lazy"></span>
+                <span class="mega-card__img"><img src="assets/services-residentiel.jpg?v=20261123c" alt="" loading="lazy"></span>
                 <span class="mega-card__name">Résidentielle <span aria-hidden="true">→</span></span>
                 <small>Garages, sous-sols, espaces de vie</small>
               </a>
               <a class="mega-card" href="installation-commerciale.html">
-                <span class="mega-card__img"><img src="assets/finitions/hero-commercial.svg" alt="" loading="lazy"></span>
+                <span class="mega-card__img"><img src="assets/services-commercial.jpg?v=20261123c" alt="" loading="lazy"></span>
                 <span class="mega-card__name">Commerciale <span aria-hidden="true">→</span></span>
                 <small>Commerces, salles d'exposition, bureaux</small>
               </a>
               <a class="mega-card" href="installation-industrielle.html">
-                <span class="mega-card__img"><img src="assets/finitions/hero-industriel.svg" alt="" loading="lazy"></span>
+                <span class="mega-card__img"><img src="assets/services-industriel.jpg?v=20261123c" alt="" loading="lazy"></span>
                 <span class="mega-card__name">Industrielle <span aria-hidden="true">→</span></span>
                 <small>Entrepôts, ateliers, usines</small>
               </a>
@@ -48,7 +46,7 @@
             <svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1 L5 5 L9 1"/></svg>
           </button>
           <div class="panel training" id="panel-formation">
-            <img src="assets/finitions/systeme-metallique.svg" alt="" loading="lazy">
+            <img src="assets/formation-visuel-3.jpg?v=20261125c" alt="" loading="lazy">
             <div class="training__body">
               <span class="eyebrow" style="font-size:11px">Formation professionnelle</span>
               <a class="training__title" href="formation-epoxy-a-z.html">Formation d’époxy Artemis System</a>
@@ -79,10 +77,8 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobile-menu" aria-label="Menu mobile">
   <div class="mm-top">
-    <!-- TODO: remplacer par le logo du client -->
     <a class="logo" href="index.html" aria-label="Artemis Coating — accueil">
-      <svg class="logo__mark" viewBox="0 0 40 34" aria-hidden="true"><path d="M20 1 L39 33 H1 Z" fill="#C9A46A"/><path d="M20 1 L20 13 L10 29 H1 Z" fill="#8A6A3B"/><path d="M20 13 L30 29 H10 Z" fill="#111110"/></svg>
-      <span class="logo__text"><span class="logo__word">ARTEMIS</span><span class="logo__sub">COATING</span></span>
+      <img class="logo__img" src="assets/logo-artemis.png?v=20261123b" alt="Artemis Coating" width="112" height="64">
     </a>
     <button class="icon-btn" type="button" aria-label="Fermer le menu" id="mm-close" style="color:var(--gold)">
       <svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 3 L17 17 M17 3 L3 17"/></svg>
@@ -92,9 +88,9 @@
     <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-services">Services d'installation<span class="plus" aria-hidden="true">+</span></button>
     <div class="mm-sub" id="acc-services">
       <a class="all" href="services-installation.html">Tous les services <span class="gold">→</span></a>
-      <a href="installation-residentielle.html"><img src="assets/finitions/hero-residentiel.svg" alt="">Résidentielle</a>
-      <a href="installation-commerciale.html"><img src="assets/finitions/hero-commercial.svg" alt="">Commerciale</a>
-      <a href="installation-industrielle.html"><img src="assets/finitions/hero-industriel.svg" alt="">Industrielle</a>
+      <a href="installation-residentielle.html"><img src="assets/services-residentiel.jpg?v=20261123c" alt="">Résidentielle</a>
+      <a href="installation-commerciale.html"><img src="assets/services-commercial.jpg?v=20261123c" alt="">Commerciale</a>
+      <a href="installation-industrielle.html"><img src="assets/services-industriel.jpg?v=20261123c" alt="">Industrielle</a>
     </div>
     <a class="mm-row" href="index.html">Accueil</a>
     <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-formation">Formation<span class="plus" aria-hidden="true">+</span></button>
