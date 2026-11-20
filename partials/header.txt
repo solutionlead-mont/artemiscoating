@@ -85,6 +85,7 @@
     </button>
   </div>
   <nav class="mm-nav">
+    <a class="mm-row" href="index.html">Accueil</a>
     <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-services">Services d'installation<span class="plus" aria-hidden="true">+</span></button>
     <div class="mm-sub" id="acc-services">
       <a class="all" href="services-installation.html">Tous les services <span class="gold">→</span></a>
@@ -92,7 +93,6 @@
       <a href="installation-commerciale.html"><img src="assets/services-commercial.jpg?v=20261123c" alt="">Commerciale</a>
       <a href="installation-industrielle.html"><img src="assets/services-industriel.jpg?v=20261123c" alt="">Industrielle</a>
     </div>
-    <a class="mm-row" href="index.html">Accueil</a>
     <button class="mm-row" type="button" aria-expanded="false" data-acc="acc-formation">Formation<span class="plus" aria-hidden="true">+</span></button>
     <div class="mm-sub" id="acc-formation">
       <a class="all" href="formation-epoxy-a-z.html">Formation d’époxy Artemis System <span class="gold">→</span></a>

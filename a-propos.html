@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261124d">
-<link rel="stylesheet" href="css/responsive-pages.css?v=20261117a">
+<link rel="stylesheet" href="css/style.css?v=20261125h">
+<link rel="stylesheet" href="css/responsive-pages.css?v=20261125g">
 </head>
 <body>
   <a href="#contenu" class="sr-only">Aller au contenu</a>
@@ -34,7 +34,7 @@
   </section>
 
   <!-- HISTOIRE -->
-  <section style="background: #111110; padding: 128px 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 96px; align-items: center">
+  <section class="ap-histoire" style="background: #111110; padding: 128px 56px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 96px; align-items: center">
     <div style="display: flex; flex-direction: column; gap: 28px">
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A46A">01 — Notre histoire</span>
       <h2 style="margin: 0; font-weight: 800; font-stretch: 72%; font-size: 72px; line-height: 0.95; text-transform: uppercase">Tout a commencé sur un plancher.</h2>
@@ -46,7 +46,7 @@
       </ol>
     </div>
     <figure style="margin: 0; position: relative">
-      <img src="assets/825351128_122144101293199581_937990531324278104_n.jpg" alt="Plancher époxy noir au fini miroir avec un rouleau Artemis" style="display: block; width: 100%; height: 640px; object-fit: cover">
+      <img class="ap-histoire__img" src="assets/825351128_122144101293199581_937990531324278104_n.jpg" alt="Plancher époxy noir au fini miroir avec un rouleau Artemis" style="display: block; width: 100%; height: 640px; object-fit: cover">
       <figcaption style="position: absolute; right: -1px; bottom: -1px; padding: 18px 22px; background: #111110; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C8C1B4">Votre solution d'epoxy</figcaption>
     </figure>
   </section>
@@ -63,13 +63,13 @@
   </section>
 
   <!-- PILIERS -->
-  <section style="background: #111110; padding: 120px 56px">
+  <section class="ap-piliers" style="background: #111110; padding: 120px 56px">
     <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 56px">
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A46A">03 — Ce que nous faisons</span>
       <h2 style="margin: 0; font-weight: 800; font-stretch: 72%; font-size: 72px; line-height: 0.95; text-transform: uppercase">Trois expertises, une seule marque.</h2>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: #2A2622">
-      <a href="#" style="position: relative; height: 480px; padding: 36px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; background: #111110; text-decoration: none">
+    <div class="ap-piliers__grid" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; background: #2A2622">
+      <a class="ap-piliers__card" href="#" style="position: relative; height: 480px; padding: 36px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; background: #111110; text-decoration: none">
         <img src="assets/apropos-produits.jpg?v=20261125a" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45">
         <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,17,16,0.96) 20%, rgba(17,17,16,0) 70%)"></span>
         <span style="position: relative; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A46A">A</span>
@@ -77,7 +77,7 @@
         <span style="position: relative; font-size: 16px; line-height: 1.6; color: #C8C1B4">Des produits et outils éprouvés sur nos propres chantiers.</span>
         <span style="position: relative; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A46A">Voir les produits →</span>
       </a>
-      <a href="#" style="position: relative; height: 480px; padding: 36px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; background: #111110; text-decoration: none">
+      <a class="ap-piliers__card" href="#" style="position: relative; height: 480px; padding: 36px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; background: #111110; text-decoration: none">
         <img src="assets/apropos-installation.jpg?v=20261125b" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45">
         <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,17,16,0.96) 20%, rgba(17,17,16,0) 70%)"></span>
         <span style="position: relative; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A46A">B</span>
@@ -85,7 +85,7 @@
         <span style="position: relative; font-size: 16px; line-height: 1.6; color: #C8C1B4">Résidentielle, commerciale et industrielle, clé en main.</span>
         <span style="position: relative; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A46A">Nos services →</span>
       </a>
-      <a href="#" style="position: relative; height: 480px; padding: 36px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; background: #111110; text-decoration: none">
+      <a class="ap-piliers__card" href="#" style="position: relative; height: 480px; padding: 36px; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; overflow: hidden; background: #111110; text-decoration: none">
         <img src="assets/formation-visuel-3.jpg?v=20261125c" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45">
         <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(0deg, rgba(17,17,16,0.96) 20%, rgba(17,17,16,0) 70%)"></span>
         <span style="position: relative; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A46A">C</span>
@@ -97,20 +97,20 @@
   </section>
 
   <!-- VALEURS + CHIFFRES -->
-  <section style="background: #181715; border-top: 1px solid #2A2622; padding: 112px 56px; display: flex; flex-direction: column; gap: 72px">
-    <div style="display: grid; grid-template-columns: 420px 1fr; gap: 80px">
+  <section class="ap-valeurs" style="background: #181715; border-top: 1px solid #2A2622; padding: 112px 56px; display: flex; flex-direction: column; gap: 72px">
+    <div class="ap-valeurs__top" style="display: grid; grid-template-columns: 420px 1fr; gap: 80px">
       <div style="display: flex; flex-direction: column; gap: 20px">
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A46A">04 — Nos valeurs</span>
         <h2 style="margin: 0; font-weight: 800; font-stretch: 72%; font-size: 64px; line-height: 0.95; text-transform: uppercase">Ce qui nous guide.</h2>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px">
+      <div class="ap-valeurs__grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 56px">
         <div style="padding-top: 22px; border-top: 1px solid #C9A46A; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 700; font-size: 22px; text-transform: uppercase">Qualité sans compromis</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A39C90">Chaque plancher est fait comme si c'était le nôtre.</p></div>
         <div style="padding-top: 22px; border-top: 1px solid #C9A46A; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 700; font-size: 22px; text-transform: uppercase">Transparence</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A39C90">Des soumissions claires et des conseils honnêtes.</p></div>
         <div style="padding-top: 22px; border-top: 1px solid #C9A46A; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 700; font-size: 22px; text-transform: uppercase">Expertise partagée</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A39C90">Nous formons la prochaine génération d'applicateurs.</p></div>
         <div style="padding-top: 22px; border-top: 1px solid #C9A46A; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 700; font-size: 22px; text-transform: uppercase">Accompagnement</h3><p style="margin: 0; font-size: 15px; line-height: 1.6; color: #A39C90">Avant, pendant et après chaque projet.</p></div>
       </div>
     </div>
-    <dl style="margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #3A3631; border-bottom: 1px solid #3A3631">
+    <dl class="ap-stats" style="margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid #3A3631; border-bottom: 1px solid #3A3631">
       <div style="padding: 32px 24px 32px 0"><dd style="margin: 0; font-weight: 800; font-stretch: 70%; font-size: 72px; line-height: 1; color: #C9A46A">20</dd><dt style="font-size: 14px; color: #A39C90; margin-top: 6px">années d'expérience</dt></div>
       <div style="padding: 32px 24px; border-left: 1px solid #3A3631"><dd style="margin: 0; font-weight: 800; font-stretch: 70%; font-size: 72px; line-height: 1; color: #C9A46A">550</dd><dt style="font-size: 14px; color: #A39C90; margin-top: 6px">projets réalisés</dt></div>
       <div style="padding: 32px 24px; border-left: 1px solid #3A3631"><dd style="margin: 0; font-weight: 800; font-stretch: 70%; font-size: 72px; line-height: 1; color: #C9A46A">100</dd><dt style="font-size: 14px; color: #A39C90; margin-top: 6px">entrepreneurs formés</dt></div>
@@ -119,15 +119,15 @@
   </section>
 
   <!-- ÉQUIPE -->
-  <section style="background: #111110; padding: 112px 56px">
+  <section class="ap-equipe" style="background: #111110; padding: 112px 56px">
     <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 48px">
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A46A">05 — L'équipe</span>
       <h2 style="margin: 0; font-weight: 800; font-stretch: 72%; font-size: 64px; line-height: 0.95; text-transform: uppercase">Les gens derrière vos planchers.</h2>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
+    <div class="ap-equipe__grid" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px">
       <sc-for list="{{ team }}" as="m" hint-placeholder-count="4">
         <figure src= style="margin: 0; display: flex; flex-direction: column; gap: 14px">
-          <div style="height: 340px; background: #1C1A17; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A39C90">    <img src="assets/chef.jpg" alt="Photo du chef"></div>
+          <div class="ap-equipe__img" style="height: 340px; background: #1C1A17; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A39C90">    <img src="assets/chef.jpg" alt="Photo du chef"></div>
           <figcaption style="display: flex; flex-direction: column; gap: 4px"><span style="font-weight: 800; font-stretch: 75%; font-size: 24px; text-transform: uppercase">Alexander jhdj</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #C9A46A">Chef de projet</span></figcaption>
         </figure>
       </sc-for>

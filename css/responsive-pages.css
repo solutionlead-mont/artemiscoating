@@ -171,3 +171,49 @@ main#contenu x-dc section.estimate .wrap{
   padding-left: clamp(20px, 4vw, 40px) !important;
   padding-right: clamp(20px, 4vw, 40px) !important;
 }
+
+/* ==========================================================================
+   Page « À propos » — sur mobile, le texte et l'image de la section Histoire
+   doivent être empilés (texte puis image), et les cartes gardent une hauteur
+   lisible. Les règles génériques ci-dessus forcent tout en une colonne ; on
+   affine ici uniquement les blocs concernés.
+   ========================================================================== */
+@media (max-width: 1100px){
+  /* Section 01 — Notre histoire : texte en haut, image en dessous. */
+  main#contenu x-dc section.ap-histoire{
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  main#contenu x-dc section.ap-histoire > div:first-child{order:1}
+  main#contenu x-dc section.ap-histoire > figure{order:2}
+  main#contenu x-dc .ap-histoire__img{
+    height: auto !important;
+    max-height: none !important;
+    min-height: 280px;
+    aspect-ratio: 16 / 10;
+  }
+  /* Section 03 — cartes d'expertise : hauteur confortable. */
+  main#contenu x-dc .ap-piliers__card{
+    height: auto !important;
+    min-height: 300px;
+  }
+  /* Section 04 — valeurs : deux colonnes sur tablette. */
+  main#contenu x-dc .ap-valeurs__grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  main#contenu x-dc .ap-stats{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+  /* Section 05 — équipe : deux colonnes sur tablette. */
+  main#contenu x-dc .ap-equipe__grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 560px){
+  main#contenu x-dc .ap-valeurs__grid,
+  main#contenu x-dc .ap-stats,
+  main#contenu x-dc .ap-equipe__grid{
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  main#contenu x-dc .ap-piliers__card{min-height: 260px}
+}
