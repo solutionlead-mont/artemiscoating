@@ -141,8 +141,8 @@ Si la boutique n'est pas configurée (ou si l'API est indisponible), tout le sit
 
 L'estimateur se trouve dans `estimateur.html` (à la racine, lien depuis la page d'accueil). Il lit ses tarifs dans `estimateur/prices.json`.
 
-- L'estimateur est un **parcours unique** : les sections s'affichent l'une sous l'autre au fur et à mesure (Projet → Type de plancher → Superficie → **Coordonnées** → Qualité → Contact), sans bouton Retour. Les coordonnées (prénom + courriel, avec une mention au lieu d'une case de consentement) sont demandées **au milieu du parcours, juste avant le choix de la qualité**, pour que le prix apparaisse immédiatement après. Le prix se calcule dans la carte de droite (au-dessus sur mobile), sans verrou ni flou.
-- Trois types d'installation : **résidentiel, commercial et industriel**. La surcharge `industrial` se règle dans `prices.json` (section « surcharges ») et apparaît dans l'admin.
+- L'estimateur est un **parcours unique en 5 étapes** : les sections s'affichent l'une sous l'autre au fur et à mesure (Projet → Type de plancher → Superficie → Qualité → **Rendez-vous**), sans bouton Retour. La dernière étape est un **formulaire de rendez-vous obligatoire** (prénom, nom, téléphone, courriel, code postal, jour et moment). **Le prix reste masqué (« — ») tant que ce formulaire n'est pas envoyé** ; il s'affiche dans la carte de droite (au-dessus sur mobile) dès l'envoi, sans verrou ni flou. Aucune case de consentement : l'envoi de la demande vaut consentement, avec un lien vers la politique de confidentialité.
+- Trois types d'installation : **résidentiel, commercial et industriel**, chacun avec une icône SVG or/noir intégrée (aucun fichier externe). La surcharge `industrial` se règle dans `prices.json` (section « surcharges ») et apparaît dans l'admin.
 - Les styles de l'estimateur sont dans `css/style.css`, sous la classe `.fe-estimator`. Un bloc d'isolation à la fin de `style.css` annule les styles globaux du site **à l'intérieur de l'estimateur uniquement** (le reste du site n'est pas affecté).
 - Pour modifier les prix : ouvrez `estimateur/admin.html`, changez les valeurs, puis cliquez sur **Enregistrer dans prices.json**.
   - **Avec WAMP (recommandé si WAMP est déjà installé) :** ouvrez `http://localhost/artemis-site/estimateur/admin.html`. Le bandeau affiche « ✓ Enregistrement direct actif (WAMP/PHP) » et **Enregistrer** écrit directement dans `estimateur/prices.json`, sans fenêtre. Une copie de l'ancien fichier est conservée dans `estimateur/prices.backup.json`. Le fichier `estimateur/save-prices.php` assure l'écriture (réservée aux requêtes locales).
@@ -154,9 +154,9 @@ L'estimateur se trouve dans `estimateur.html` (à la racine, lien depuis la page
 
 ### Capture des demandes (leads) et GoHighLevel
 
-- Le prénom et le courriel sont demandés **à l'étape 4, juste avant la qualité**. Une mention indique que demander l'estimation vaut consentement à être contacté au sujet du projet (aucune case à cocher). Le lead `estimate_started` est envoyé dès cette étape, puis `booking` à la réservation de la visite.
+- Le formulaire de rendez-vous est la **dernière étape obligatoire** du parcours : il filtre les demandes sérieuses. Une mention indique que l'envoi vaut consentement à être contacté au sujet du projet (aucune case à cocher). Seul le lead `booking` est envoyé, au moment de la réservation, et le prix s'affiche à ce moment-là.
 - Les demandes sont pour l'instant conservées **dans le navigateur du visiteur** (`localStorage`, clé `artemis_leads`) et affichées dans la console. **Elles ne sont pas encore envoyées à l'entreprise.**
-- Pour brancher GoHighLevel : dans `estimateur.html`, remplacez `var LEAD_WEBHOOK_URL = '';` par l'URL du webhook entrant de votre CRM. Chaque demande (`estimate_started` et `booking`) sera alors envoyée en JSON à GoHighLevel.
+- Pour brancher GoHighLevel : dans `estimateur.html`, remplacez `var LEAD_WEBHOOK_URL = '';` par l'URL du webhook entrant de votre CRM. Chaque demande `booking` sera alors envoyée en JSON à GoHighLevel.
 - La page `politique-de-confidentialite.html` contient la politique de confidentialité (Loi 25 / LPRPDE) liée à la mention de consentement.
 
 ## Mise en ligne sur Cloudflare Pages

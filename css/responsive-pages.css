@@ -150,3 +150,24 @@
     object-fit: cover;
   }
 }
+
+/* ==========================================================================
+   Section « estimateur » (reprise de la section 4 de l'accueil).
+   Elle possède déjà ses propres règles responsive dans style.css. Les
+   correctifs génériques ci-dessus la déformaient : double padding (celui de
+   la section + celui de .wrap) et titre réduit. On les annule ici.
+   ========================================================================== */
+main#contenu x-dc section.estimate{
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+main#contenu x-dc section.estimate h2{
+  font-size: clamp(36px, 5.8vw, 84px) !important;
+  line-height: .9 !important;
+}
+/* Le contenu garde ses marges latérales fluides, comme sur l'accueil. */
+main#contenu x-dc section.estimate .wrap{
+  padding-left: clamp(20px, 4vw, 40px) !important;
+  padding-right: clamp(20px, 4vw, 40px) !important;
+}

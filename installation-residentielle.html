@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive-pages.css">
+<link rel="stylesheet" href="css/style.css?v=20261120a">
+<link rel="stylesheet" href="css/responsive-pages.css?v=20261117a">
 </head>
 <body>
   <a href="#contenu" class="sr-only">Aller au contenu</a>
@@ -22,13 +22,13 @@
 <x-dc>
 <helmet>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<style>body{margin:0}a{color:#ECE6DA}a:hover{color:#C9A46A}</style>
+<style>body{margin:0}a{color:#ECE6DA}a:hover{color:#C9A46A}.finitions-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}.finition-carte{margin:0;background:#1C1A17;display:flex;flex-direction:column;gap:10px}.finition-carte img{width:100%;height:180px;object-fit:cover;display:block}.finition-carte span{padding:0 0 16px;font-size:13px;letter-spacing:0.06em;color:#C8C1B4;text-align:center}.finition-titre{margin:0 0 24px;font-weight:800;font-stretch:72%;text-transform:uppercase;font-size:30px;line-height:1}@media(max-width:1024px){.finitions-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.finitions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}</style>
 </helmet>
 <div style="background: #0B0B0A; color: #ECE6DA; font-family: Archivo, system-ui, sans-serif; overflow: hidden">
 <br>
   <!-- HÉROS -->
   <section style="position: relative; height: 660px; background: #111110; overflow: hidden">
-    <img src="assets/residentiel.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55">
+    <img src="assets/finitions/hero-residentiel.svg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.55">
     <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17,17,16,0.96) 0%, rgba(17,17,16,0.7) 45%, rgba(17,17,16,0.25) 100%)"></div>
     <div style="position: relative"><dc-import name="NavBarA" active="install" hint-size="1440px,88px"></dc-import></div>
     <div style="position: relative; padding: 96px 56px 0; max-width: 960px; display: flex; flex-direction: column; gap: 26px">
@@ -36,11 +36,10 @@
       <h1 style="margin: 0; font-weight: 800; font-stretch: 70%; font-size: 120px; line-height: 0.86; text-transform: uppercase">Installation <span style="color: #C9A46A">résidentielle.</span></h1>
       <p style="margin: 0; font-size: 19px; line-height: 1.6; color: #D6CFC2; max-width: 620px">Un garage, un sous-sol ou un espace de vie qui impressionne, résiste au quotidien et prend de la valeur.</p>
       <div style="display: flex; gap: 14px">
-        <a href="#estime" style="height: 60px; padding: 0 32px; display: inline-flex; align-items: center; gap: 12px; background: #C9A46A; color: #111110; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none">Estimé gratuit en 60 secondes <span aria-hidden="true">→</span></a>
-        <a href="#" style="height: 60px; padding: 0 30px; display: inline-flex; align-items: center; border: 1px solid #ECE6DA; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-decoration: none">Appeler [TÉLÉPHONE]</a>
+        <a href="estimateur.html" style="height: 60px; padding: 0 32px; display: inline-flex; align-items: center; gap: 12px; background: #C9A46A; color: #111110; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none">Estimé gratuit en 60 secondes <span aria-hidden="true">→</span></a>
+        <a href="tel:+18193888343" style="height: 60px; padding: 0 30px; display: inline-flex; align-items: center; border: 1px solid #ECE6DA; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-decoration: none">Appeler +1 (819) 388-8343</a>
       </div>
     </div>
-    <span style="position: absolute; right: 24px; bottom: 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A39C90">IMAGE À REMPLACER PAR LA PHOTO IA RÉSIDENTIELLE</span>
   </section>
 
   <!-- INTRO + AVANTAGES -->
@@ -79,27 +78,33 @@
     <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px">
       <div style="display: flex; flex-direction: column; gap: 20px">
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #C9A46A">03 — Systèmes recommandés</span>
-        <h2 style="margin: 0; font-weight: 800; font-stretch: 72%; font-size: 68px; line-height: 0.95; text-transform: uppercase">Choisissez votre fini.</h2>
+        <h2 style="margin: 0; font-weight: 800; font-stretch: 72%; font-size: 68px; line-height: 0.95; text-transform: uppercase">Une finition pour tous les goûts et les besoins</h2>
       </div>
       <a href="produits.html" style="font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #C9A46A; padding: 12px 0; border-bottom: 1px solid #C9A46A; text-decoration: none">Voir les produits Artemis System →</a>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
-        <article style="background: #1C1A17; display: flex; flex-direction: column; outline: 1px solid #C9A46A;">
-          <div style="position: relative; overflow: hidden"><svg width="100%" height="200" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true" style="display:block"><filter id="Fres0"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="1" seed="0"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix><feComponentTransfer><feFuncR type="discrete" tableValues="0.1 0.3 0.5 0.72 0.62 0.9"></feFuncR><feFuncG type="discrete" tableValues="0.1 0.29 0.48 0.7 0.48 0.86"></feFuncG><feFuncB type="discrete" tableValues="0.1 0.27 0.45 0.66 0.28 0.8"></feFuncB></feComponentTransfer></filter><rect width="300" height="200" filter="url(#Fres0)"></rect></svg><span style="position: absolute; top: 12px; left: 12px; padding: 5px 10px; background: #C9A46A; color: #111110; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase">Recommandé</span></div>
-          <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 26px; line-height: 1">Époxy à flocons</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C8C1B4">Le plus populaire pour les garages : texture, adhérence et camouflage de la poussière.</p></div>
-        </article>
-        <article style="background: #1C1A17; display: flex; flex-direction: column; ">
-          <div style="position: relative; overflow: hidden"><svg width="100%" height="200" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true" style="display:block"><filter id="Fres1"><feTurbulence type="turbulence" baseFrequency="0.006 0.018" numOctaves="4" seed="1"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix><feComponentTransfer><feFuncR type="table" tableValues="0.05 0.08 0.35 0.75 0.9"></feFuncR><feFuncG type="table" tableValues="0.05 0.07 0.25 0.58 0.75"></feFuncG><feFuncB type="table" tableValues="0.05 0.06 0.13 0.32 0.5"></feFuncB></feComponentTransfer></filter><rect width="300" height="200" filter="url(#Fres1)"></rect></svg></div>
-          <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 26px; line-height: 1">Époxy métallique</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C8C1B4">Effet marbré unique pour les sous-sols et espaces de vie.</p></div>
-        </article>
-        <article style="background: #1C1A17; display: flex; flex-direction: column; ">
-          <div style="position: relative; overflow: hidden"><svg width="100%" height="200" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true" style="display:block"><defs><linearGradient id="Fres2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6E6C69"></stop><stop offset="0.45" stop-color="#3B3A38"></stop><stop offset="0.55" stop-color="#8C8A86"></stop><stop offset="1" stop-color="#2A2927"></stop></linearGradient></defs><rect width="300" height="200" fill="url(#Fres2)"></rect></svg></div>
-          <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 26px; line-height: 1">Finition polyaspartique</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C8C1B4">Séchage rapide et résistance aux UV.</p></div>
-        </article>
-        <article style="background: #1C1A17; display: flex; flex-direction: column; ">
-          <div style="position: relative; overflow: hidden"><svg width="100%" height="200" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true" style="display:block"><rect width="300" height="200" fill="#55575A"></rect><rect x="40" y="0" width="10" height="200" fill="#D1A20E"></rect><rect x="250" y="0" width="10" height="200" fill="#D1A20E"></rect></svg></div>
-          <div style="padding: 24px; display: flex; flex-direction: column; gap: 10px"><h3 style="margin: 0; font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 26px; line-height: 1">Couleur unie</h3><p style="margin: 0; font-size: 14px; line-height: 1.6; color: #C8C1B4">Fini net et sobre, pour ateliers et rangement.</p></div>
-        </article>
+    <div style="display: flex; flex-direction: column; gap: 64px">
+      <div>
+        <h3 class="finition-titre">Finition flake</h3>
+        <div class="finitions-grid">
+          <figure class="finition-carte"><img src="assets/finitions/flake-1.svg" alt="Finition flake 1"><span>Flake 1</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/flake-2.svg" alt="Finition flake 2"><span>Flake 2</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/flake-3.svg" alt="Finition flake 3"><span>Flake 3</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/flake-4.svg" alt="Finition flake 4"><span>Flake 4</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/flake-5.svg" alt="Finition flake 5"><span>Flake 5</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/flake-6.svg" alt="Finition flake 6"><span>Flake 6</span></figure>
+        </div>
+      </div>
+      <div>
+        <h3 class="finition-titre">Finition métallique</h3>
+        <div class="finitions-grid">
+          <figure class="finition-carte"><img src="assets/finitions/metallique-marbre.svg" alt="Finition métallique Marbre"><span>Marbre</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/metallique-nuage.svg" alt="Finition métallique Nuage"><span>Nuage</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/metallique-mouvement.svg" alt="Finition métallique Mouvement"><span>Mouvement</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/metallique-veinage.svg" alt="Finition métallique Veinage"><span>Veinage</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/metallique-contraste.svg" alt="Finition métallique Contraste"><span>Contraste</span></figure>
+          <figure class="finition-carte"><img src="assets/finitions/metallique-multicolore.svg" alt="Finition métallique Multicolore"><span>Multicolore</span></figure>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -111,9 +116,9 @@
     </div>
     <ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid #C9A46A">
       <li style="padding: 28px 20px 0 0px;  display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">01</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Visite et évaluation</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Analyse du béton, de l'usage et de vos attentes.</span></li>
-      <li style="padding: 28px 20px 0 20px; border-left: 1px solid #2A2622; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">02</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Soumission détaillée</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Système recommandé, prix et échéancier clairs.</span></li>
+      <li style="padding: 28px 20px 0 20px; border-left: 1px solid #2A2622; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">02</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Soumission détaillée</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Système recommandé, prix et échéanciers clairs.</span></li>
       <li style="padding: 28px 20px 0 20px; border-left: 1px solid #2A2622; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">03</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Préparation</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Meulage, réparation des fissures et nettoyage.</span></li>
-      <li style="padding: 28px 20px 0 20px; border-left: 1px solid #2A2622; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">04</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Application</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Apprêt, couche de base, décor et finition.</span></li>
+      <li style="padding: 28px 20px 0 20px; border-left: 1px solid #2A2622; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">04</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Application</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Couche de base, décor et finition.</span></li>
       <li style="padding: 28px 20px 0 20px; border-left: 1px solid #2A2622; display: flex; flex-direction: column; gap: 10px"><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 56px; line-height: 1; color: #C9A46A">05</span><span style="font-weight: 700; font-size: 17px; text-transform: uppercase">Remise et suivi</span><span style="font-size: 14px; line-height: 1.6; color: #A39C90">Inspection finale et conseils d'entretien.</span></li>
     </ol>
   </section>
@@ -131,22 +136,23 @@
     </div>
   </section>
 
-  <section id="estime" style="background: #C9A46A; color: #111110; padding: 104px 56px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 80px; align-items: center">
-    <div style="display: flex; flex-direction: column; gap: 22px">
-      <span style="align-self: flex-start; padding: 8px 14px; background: #111110; color: #C9A46A; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em">GRATUIT — SANS ENGAGEMENT</span>
-      <h2 style="margin: 0; font-weight: 800; font-stretch: 70%; font-size: 76px; line-height: 0.9; text-transform: uppercase">Obtenez un estimé gratuit en 60 secondes du prix de vos travaux</h2>
-      <p style="margin: 0; font-size: 18px; color: #2A2014">Pour l'application de l'époxy à domicile (résidentiel seulement)</p>
-      <a href="#" style="align-self: flex-start; height: 64px; padding: 0 34px; display: inline-flex; align-items: center; gap: 14px; background: #111110; color: #ECE6DA; font-weight: 800; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none">Je veux un estimé gratuit des travaux maintenant <span aria-hidden="true" style="color: #C9A46A">→</span></a>
+<section class="estimate" aria-labelledby="estimate-title">
+      <video class="estimate-bg-video" autoplay muted loop playsinline>
+        <source src="assets/pour.mp4" type="video/mp4">
+    </video>
+  <div class="wrap">
+    <div class="estimate__text">
+      <span class="estimate__tag">GRATUIT — SANS ENGAGEMENT</span>
+      <h2 id="estimate-title" class="display">Obtenez un estimé gratuit en 60 secondes du prix de vos travaux</h2>
+      <p>Pour l'application de l'époxy à domicile (résidentiel seulement)</p>
+      <a class="btn btn--dark" href="estimateur.html">Je veux un estimé gratuit des travaux maintenant <span class="arrow" aria-hidden="true">→</span></a>
     </div>
-    <div aria-hidden="true" style="background: #111110; color: #ECE6DA; padding: 32px; display: flex; flex-direction: column; gap: 4px; box-shadow: 16px 16px 0 #8A6A3B">
-      <div style="display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 12px; margin-bottom: 8px"><span style="color: #C9A46A">ESTIMATEUR ARTEMIS</span><span style="color: #A39C90">≈ 60 S</span></div>
-      <div style="padding: 14px 0; border-bottom: 1px solid #3A3631"><span style="display: block; font-size: 13px; color: #A39C90">1 · Type d'espace</span><span style="font-size: 18px; font-weight: 600">Garage double</span></div>
-      <div style="padding: 14px 0; border-bottom: 1px solid #3A3631"><span style="display: block; font-size: 13px; color: #A39C90">2 · Superficie</span><span style="font-size: 18px; font-weight: 600">[XXX] pi²</span></div>
-      <div style="padding: 14px 0; border-bottom: 1px solid #3A3631"><span style="display: block; font-size: 13px; color: #A39C90">3 · Fini souhaité</span><span style="font-size: 18px; font-weight: 600">Époxy à flocons</span></div>
-      <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 10px"><span style="font-size: 14px; color: #C8C1B4">Estimé</span><span style="font-weight: 800; font-stretch: 72%; text-transform: uppercase; font-size: 40px; color: #C9A46A">[$ – $]</span></div>
+    <div class="est-card" aria-hidden="true">
+      <div class="est-card__top"><span>ESTIMATEUR ARTEMIS</span><span>≈ 60 S</span></div>
+      <img src="assets/estimateur.png" />
     </div>
-  </section>
-
+  </div>
+</section>
   <!-- FAQ + AUTRES SERVICES -->
   <section style="background: #111110; padding: 112px 56px; display: grid; grid-template-columns: 420px 1fr; gap: 80px">
     <div style="display: flex; flex-direction: column; gap: 22px">
@@ -156,11 +162,14 @@
       <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start"><a href="installation-commerciale.html" style="height: 52px; padding: 0 22px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid #5A544C; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none">Installation commerciale <span aria-hidden="true" style="color: #C9A46A">→</span></a><a href="installation-industrielle.html" style="height: 52px; padding: 0 22px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid #5A544C; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none">Installation industrielle <span aria-hidden="true" style="color: #C9A46A">→</span></a></div>
     </div>
     <div style="display: flex; flex-direction: column; border-top: 1px solid #3A3631">
-      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Combien de temps avant de pouvoir garer ma voiture ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">[Réponse à fournir.]</p></div>
-      <button type="button" aria-expanded="false" style="padding: 24px 0; display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; border-bottom: 1px solid #3A3631; color: #ECE6DA; font: 700 19px Archivo, sans-serif; text-align: left">Mon garage a des fissures : est-ce un problème ?<span aria-hidden="true" style="color: #C9A46A">+</span></button>
-      <button type="button" aria-expanded="false" style="padding: 24px 0; display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; border-bottom: 1px solid #3A3631; color: #ECE6DA; font: 700 19px Archivo, sans-serif; text-align: left">Le plancher est-il glissant quand il est mouillé ?<span aria-hidden="true" style="color: #C9A46A">+</span></button>
-      <button type="button" aria-expanded="false" style="padding: 24px 0; display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; border-bottom: 1px solid #3A3631; color: #ECE6DA; font: 700 19px Archivo, sans-serif; text-align: left">Comment entretenir mon plancher époxy ?<span aria-hidden="true" style="color: #C9A46A">+</span></button>
-      <button type="button" aria-expanded="false" style="padding: 24px 0; display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; border-bottom: 1px solid #3A3631; color: #ECE6DA; font: 700 19px Archivo, sans-serif; text-align: left">Offrez-vous une garantie ?<span aria-hidden="true" style="color: #C9A46A">+</span></button>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Qu'est-ce qu'un plancher d'époxy ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">C'est un revêtement de résine appliqué en plusieurs couches directement sur votre dalle de béton. Une fois durci, il forme une surface continue, sans joints, étanche et beaucoup plus résistante qu'une peinture à béton.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Où peut-on installer de l'époxy ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Partout où il y a une dalle de béton : garage, sous-sol, atelier, salle mécanique, commerce ou entrepôt. Pour les surfaces extérieures (balcon, perron, entrée), nous utilisons un système conçu pour résister aux rayons UV et aux écarts de température.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Est-ce que le plancher est glissant ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Non, s'il est bien conçu. Le fini flocons offre déjà une texture naturelle, et nous pouvons ajouter un agent antidérapant dans la couche de finition pour les zones exposées à l'eau ou à la neige.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Mon béton est fissuré ou abîmé. Est-ce un problème ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Non. Les fissures, les trous et les éclats sont réparés avant l'application du revêtement. Si une fissure est encore active (la dalle bouge), elle peut réapparaître avec le temps : nous vous le disons dès l'évaluation.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Et s'il y a de l'humidité dans ma dalle ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Nous mesurons le taux d'humidité du béton avant de commencer. S'il est trop élevé, nous appliquons un apprêt pare-vapeur conçu pour bloquer l'humidité. Une dalle humide non traitée est la première cause de décollement.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Combien de temps dure un plancher d'époxy ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Un système professionnel posé sur un béton bien préparé dure généralement de 10 à 20 ans en usage résidentiel. La durée de vie dépend surtout de la préparation de la dalle et de la qualité de la couche de finition.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Est-ce que ça résiste au sel, au calcium et à l'huile ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Oui. Le revêtement est étanche : le sel de déglaçage, le calcium, l'huile à moteur et l'essence restent en surface et s'essuient. C'est l'une des principales raisons de faire un garage en époxy au Québec.</p></div>
+      <div style="padding: 24px 0; border-bottom: 1px solid #3A3631; display: flex; flex-direction: column; gap: 12px"><button type="button" aria-expanded="true" style="display: flex; justify-content: space-between; align-items: center; background: transparent; border: 0; padding: 0; color: #C9A46A; font: 700 19px Archivo, sans-serif; text-align: left">Comment entretenir mon plancher ?<span aria-hidden="true">−</span></button><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #C8C1B4; max-width: 720px">Un coup de balai et un lavage à l'eau tiède avec un savon doux suffisent. Évitez les nettoyants acides, le vinaigre et les savons qui laissent un film. Au printemps, rincez les résidus de sel et de calcium laissés par l'hiver.</p></div>
     </div>
   </section>
 

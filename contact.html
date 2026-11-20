@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive-pages.css">
+<link rel="stylesheet" href="css/style.css?v=20261120a">
+<link rel="stylesheet" href="css/responsive-pages.css?v=20261117a">
 </head>
 <body>
   <a href="#contenu" class="sr-only">Aller au contenu</a>
@@ -63,12 +63,12 @@
       <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
         <legend style="font-size: 14px; font-weight: 600; color: #C8C1B4; margin-bottom: 12px">Type de demande *</legend>
         <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
-          <label style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 1px solid #C9A46A; background: rgba(201,164,106,0.1); color: #C9A46A; font-size: 14px; font-weight: 600"><input type="radio" name="type" checked="" style="accent-color: #C9A46A">Installation résidentielle</label>
-          <label style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 1px solid #3A3631; font-size: 14px; font-weight: 600"><input type="radio" name="type" style="accent-color: #C9A46A">Installation commerciale</label>
-          <label style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 1px solid #3A3631; font-size: 14px; font-weight: 600"><input type="radio" name="type" style="accent-color: #C9A46A">Installation industrielle</label>
-          <label style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 1px solid #3A3631; font-size: 14px; font-weight: 600"><input type="radio" name="type" style="accent-color: #C9A46A">Formation</label>
-          <label style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 1px solid #3A3631; font-size: 14px; font-weight: 600"><input type="radio" name="type" style="accent-color: #C9A46A">Produits</label>
-          <label style="height: 52px; display: flex; align-items: center; gap: 10px; padding: 0 16px; border: 1px solid #3A3631; font-size: 14px; font-weight: 600"><input type="radio" name="type" style="accent-color: #C9A46A">Autre</label>
+          <label class="ct-type"><input type="radio" name="type" value="installation-residentielle" required>Installation résidentielle</label>
+          <label class="ct-type"><input type="radio" name="type" value="installation-commerciale">Installation commerciale</label>
+          <label class="ct-type"><input type="radio" name="type" value="installation-industrielle">Installation industrielle</label>
+          <label class="ct-type"><input type="radio" name="type" value="formation">Formation</label>
+          <label class="ct-type"><input type="radio" name="type" value="produits">Produits</label>
+          <label class="ct-type"><input type="radio" name="type" value="autre">Autre</label>
         </div>
       </fieldset>
       <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">

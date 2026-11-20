@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/responsive-pages.css">
+<link rel="stylesheet" href="css/style.css?v=20261120a">
+<link rel="stylesheet" href="css/responsive-pages.css?v=20261117a">
 </head>
 <body>
   <a href="#contenu" class="sr-only">Aller au contenu</a>
@@ -52,9 +52,14 @@
   </section>
 
   <!-- MISSION -->
-  <section style="background: #C9A46A; color: #111110; padding: 112px 56px; display: grid; grid-template-columns: 300px 1fr; gap: 80px">
-    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: #3B2A1A">02 — Notre mission</span>
-    <p style="margin: 0; font-weight: 800; font-stretch: 70%; font-size: 88px; line-height: 0.9; text-transform: uppercase">Devenir la référence de l'industrie de l'époxy — par la qualité de nos produits, de nos installations et de nos formations.</p>
+  <section class="mission" aria-labelledby="mission-title">
+    <video class="mission-bg-video" autoplay muted loop playsinline aria-hidden="true">
+      <source src="assets/pour.mp4" type="video/mp4">
+    </video>
+    <div class="mission__inner">
+      <span class="mission__tag">02 — Notre mission</span>
+      <h2 id="mission-title" class="mission__statement">Devenir la référence de l'industrie de l'époxy — par la qualité de nos produits, de nos installations et de nos formations.</h2>
+    </div>
   </section>
 
   <!-- PILIERS -->

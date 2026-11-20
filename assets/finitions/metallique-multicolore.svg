@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141018"/>
+      <stop offset="0.4" stop-color="#5D7FA8"/>
+      <stop offset="0.62" stop-color="#E0B45E"/>
+      <stop offset="1" stop-color="#141018"/>
+    </linearGradient>
+    <filter id="sw" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.004 0.012" numOctaves="4" seed="17" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="140" xChannelSelector="R" yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="0.6"/>
+    </filter>
+    <linearGradient id="shine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#fff" stop-opacity="0.32"/>
+      <stop offset="0.55" stop-color="#fff" stop-opacity="0.05"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)" filter="url(#sw)"/>
+  <path d="M-100 620 C 250 420, 480 760, 820 470 S 1250 300, 1400 380 L 1400 900 L -100 900 Z" fill="#E0B45E" opacity="0.18" filter="url(#sw)"/>
+  <rect width="1200" height="800" fill="url(#shine)"/>
+</svg>
